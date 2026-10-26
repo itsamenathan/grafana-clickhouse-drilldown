@@ -1,0 +1,8 @@
+<!-- Public synthetic fixture credential. Never use for production. -->
+<config>
+  <host>127.0.0.1</host>
+  <port>9000</port>
+  <user>fixture_probe</user>
+  <password>fixture-probe-not-production</password>
+  <database>fixture</database>
+</config>

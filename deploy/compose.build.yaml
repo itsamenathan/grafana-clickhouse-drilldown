@@ -1,0 +1,8 @@
+name: drilldown-build
+services:
+  adapter:
+    image: ${ADAPTER_IMAGE:-local/grafana-clickhouse-drilldown:dev}
+    build:
+      context: ..
+      args:
+        VERSION: ${ADAPTER_VERSION:-dev}

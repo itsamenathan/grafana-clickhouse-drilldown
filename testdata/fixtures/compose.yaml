@@ -1,0 +1,95 @@
+# Synthetic, disposable LOCAL tests only. Never deploy this on observability.
+name: drilldown-fixtures
+services:
+  grafana:
+    image: grafana/grafana:13.2.4@sha256:dbbc38ea21103cefb50396340cd88afec779c7e070b0a7bf5a75b4ce46651d3f
+    environment:
+      GF_SECURITY_ADMIN_USER: fixture_admin
+      GF_SECURITY_ADMIN_PASSWORD: fixture-grafana-not-production
+      GF_SERVER_ROOT_URL: http://127.0.0.1:13001/
+      GF_PLUGINS_PREINSTALL_SYNC: grafana-lokiexplore-app@3.0.0
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, http://127.0.0.1:3000/api/health]
+      interval: 5s
+      timeout: 3s
+      retries: 18
+      start_period: 15s
+    ports:
+      - "127.0.0.1:13001:3000"
+    volumes:
+      - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/fixture.yaml:ro
+      - ./grafana-plugins.yaml:/etc/grafana/provisioning/plugins/fixture.yaml:ro
+    tmpfs:
+      - /var/lib/grafana:uid=472,gid=472,mode=0755
+    # Match production Grafana. tmpfs plugin/database storage is also charged
+    # to this cgroup, so 512 MiB caused fixture OOMs during browser acceptance.
+    mem_limit: 1g
+    cpus: 1
+  adapter:
+    image: local/grafana-clickhouse-drilldown:dev
+    environment:
+      CLICKHOUSE_ADDRESS: clickhouse:9000
+      CLICKHOUSE_DATABASE: fixture
+      CLICKHOUSE_TABLE: otel_logs
+      CLICKHOUSE_USER: fixture_reader
+      CLICKHOUSE_PASSWORD: fixture-reader-not-production
+      SOURCE_OFFER_URL: http://127.0.0.1:13101/source
+    ports:
+      - "127.0.0.1:13101:3100"
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 256m
+    pids_limit: 64
+  clickhouse:
+    image: clickhouse/clickhouse-server:26.9.20.23-alpine@sha256:ec6b774f7ea971007203e2fffa0349e0c3a40011a71765336162a2703abb4d33
+    environment:
+      CLICKHOUSE_USER: fixture_admin
+      CLICKHOUSE_PASSWORD: fixture-admin-not-production
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    ports:
+      - "127.0.0.1:19000:9000"
+      - "127.0.0.1:18123:8123"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/01-fixtures.sql:ro
+      - ./client.xml:/etc/clickhouse-client/fixture.xml:ro
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--config-file=/etc/clickhouse-client/fixture.xml", "--query", "SELECT count() FROM fixture.otel_logs"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    tmpfs:
+      - /var/lib/clickhouse
+      - /var/log/clickhouse-server
+    mem_limit: 1g
+    cpus: 1
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+  loki:
+    image: grafana/loki:3.7.9@sha256:0db216b630ae1f348a1584c67f3cead8b4c1fc839169a39501db664744158e28
+    command: ["-config.file=/etc/loki/fixture.yaml"]
+    ports:
+      - "127.0.0.1:13100:3100"
+    volumes:
+      - ./loki.yaml:/etc/loki/fixture.yaml:ro
+    tmpfs:
+      - /loki:uid=10001,gid=10001,mode=0700
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    cpus: 1
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"

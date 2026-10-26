@@ -1,0 +1,32 @@
+# Separate runtime project on observability. No published ports, no fixture
+# services, no collector or existing Grafana data-source changes.
+name: clickhouse-loki-adapter
+services:
+  adapter:
+    image: ${ADAPTER_IMAGE:?set the exact locally loaded image reference}
+    restart: unless-stopped
+    environment:
+      CLICKHOUSE_ADDRESS: ch-server:9000
+      CLICKHOUSE_DATABASE: default
+      CLICKHOUSE_TABLE: otel_logs
+      CLICKHOUSE_USER: clickhouse_drilldown
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?restricted runtime credential required}
+      SOURCE_OFFER_URL: ${SOURCE_OFFER_URL:?set the authenticated Grafana source download URL}
+    networks:
+      clickstack_internal:
+        aliases: [clickhouse-loki-go]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 256m
+    memswap_limit: 256m
+    cpus: 0.5
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+networks:
+  clickstack_internal:
+    external: true

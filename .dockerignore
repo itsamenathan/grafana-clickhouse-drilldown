@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+artifacts
+bin
+dist
+coverage
+test-results
+playwright-report
+node_modules
+**/node_modules
+*.out
+*.test

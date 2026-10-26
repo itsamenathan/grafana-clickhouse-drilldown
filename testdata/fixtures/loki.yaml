@@ -1,0 +1,38 @@
+auth_enabled: false
+server:
+  http_listen_port: 3100
+common:
+  instance_addr: 127.0.0.1
+  path_prefix: /loki
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+schema_config:
+  configs:
+    - from: 2024-01-01
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+limits_config:
+  allow_structured_metadata: true
+  volume_enabled: true
+  reject_old_samples: false
+querier:
+  # Fixed synthetic timestamps must be queried from the ingester as well as
+  # disk, regardless of their age relative to the workstation clock.
+  query_ingesters_within: 0s
+ingester:
+  # Single-binary Loki derives another ingester lookback from chunk settings;
+  # it takes precedence over the querier setting above. Cover the fixed fixture
+  # dates without shifting or rounding their nanosecond timestamps.
+  query_store_max_look_back_period: 87600h
+analytics:
+  reporting_enabled: false
