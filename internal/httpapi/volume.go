@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"grafana-clickhouse-drilldown/internal/engine"
+	"grafana-clickhouse-drilldown/internal/record"
 )
 
 func (a *queryAPI) volume(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +25,7 @@ func (a *queryAPI) volume(w http.ResponseWriter, r *http.Request) {
 		fail(w, errors.New("unsupported volume aggregation mode"))
 		return
 	}
-	start, end, err := bounds(r)
+	start, end, err := a.bounds(r)
 	if err != nil {
 		fail(w, err)
 		return
@@ -35,7 +36,7 @@ func (a *queryAPI) volume(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.URL.Path != "/loki/api/v1/index/volume_range" {
-		summaries, supported, err := a.summarized(r, start, end)
+		summaries, supported, err := a.summarized(r, start, end, false)
 		if err != nil {
 			fail(w, err)
 			return
@@ -67,26 +68,69 @@ func (a *queryAPI) volume(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	events, err := a.selected(r, start, end)
+	step := int64(0)
+	if r.URL.Path == "/loki/api/v1/index/volume_range" {
+		d, err := duration(r.Form.Get("step"), time.Minute)
+		if err != nil || (end-start)/int64(d) >= engine.MaxPoints {
+			fail(w, errors.New("invalid volume step or too many points"))
+			return
+		}
+		step = int64(d)
+	}
+	source, err := requestSource(r)
+	if err != nil {
+		fail(w, err)
+		return
+	}
+	// Volumes need only the SQL-computed service and the message length.
+	counts := map[string]int{}
+	buckets := map[string]map[int64]int{}
+	streams := map[string]bool{}
+	entries, retained := 0, 0
+	err = a.engine.Each(r.Context(), source, start, end, record.ScanOptions{}, func(event engine.Event) error {
+		name := event.Stream["service_name"]
+		key := engine.Key(event.Stream)
+		if _, exists := counts[name]; !exists {
+			if len(counts) >= 5000 {
+				return errors.New("too many volume series; narrow the selection")
+			}
+			if size := len(name) + len(key) + 512; size > a.limits.MaxRetainedBytes-retained {
+				return engine.ErrRetainedLimit
+			} else {
+				retained += size
+			}
+		}
+		counts[name] += len(event.Body)
+		streams[key] = true
+		entries++
+		if step > 0 {
+			if buckets[name] == nil {
+				buckets[name] = map[int64]int{}
+			}
+			index := (event.Timestamp - start) / step
+			if _, exists := buckets[name][index]; !exists {
+				if 128 > a.limits.MaxRetainedBytes-retained {
+					return engine.ErrRetainedLimit
+				}
+				retained += 128
+			}
+			buckets[name][index] += len(event.Body)
+		}
+		return nil
+	})
 	if err != nil {
 		fail(w, err)
 		return
 	}
 	if r.URL.Path == "/loki/api/v1/index/stats" {
-		streams := map[string]bool{}
 		bytes := 0
-		for _, event := range events {
-			streams[engine.Key(event.Stream)] = true
-			bytes += len(event.Body)
+		for _, count := range counts {
+			bytes += count
 		}
 		// ClickHouse has no Loki chunks. Message bytes and event counts are
-		// exact over this bounded selection, not Loki index-size estimates.
-		respond(w, http.StatusOK, map[string]any{"streams": len(streams), "chunks": 0, "entries": len(events), "bytes": bytes})
+		// exact over this selection, not Loki index-size estimates.
+		respond(w, http.StatusOK, map[string]any{"streams": len(streams), "chunks": 0, "entries": entries, "bytes": bytes})
 		return
-	}
-	counts := map[string]int{}
-	for _, event := range events {
-		counts[event.Stream["service_name"]] += len(event.Body)
 	}
 	names := sortedKeys(counts)
 	sort.Slice(names, func(i, j int) bool {
@@ -106,28 +150,16 @@ func (a *queryAPI) volume(w http.ResponseWriter, r *http.Request) {
 		respond(w, http.StatusOK, success("vector", result))
 		return
 	}
-	step, err := duration(r.Form.Get("step"), time.Minute)
-	if err != nil || (end-start)/int64(step) >= engine.MaxPoints {
-		fail(w, errors.New("invalid volume step or too many points"))
-		return
-	}
 	sampleCount := 0
 	for _, name := range names {
 		series := engine.Series{Metric: map[string]string{"service_name": name}, Values: [][]any{}}
-		buckets := map[int64]int{}
-		for _, event := range events {
-			if event.Stream["service_name"] == name {
-				bucket := (event.Timestamp - start) / int64(step)
-				buckets[bucket] += len(event.Body)
-			}
-		}
 		for t := start; t < end; {
-			next := t + int64(step)
+			next := t + step
 			if next > end || next < t {
 				next = end
 			}
-			index := (t - start) / int64(step)
-			if count, found := buckets[index]; found {
+			index := (t - start) / step
+			if count, found := buckets[name][index]; found {
 				sampleCount++
 				series.Values = append(series.Values, []any{engine.Seconds(next), strconv.Itoa(count)})
 			}

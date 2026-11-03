@@ -19,13 +19,12 @@ func retryBusy(ctx context.Context, run func() (driver.Rows, error)) (driver.Row
 		if err := ctx.Err(); err != nil {
 			return nil, err
 		}
+		// On error the driver returns a typed nil *rows in a non-nil
+		// interface. There is nothing to close, and closing it panics.
 		rows, err := run()
 		var exception *clickhouse.Exception
 		if err == nil || !errors.As(err, &exception) || exception.Code != 202 || attempt >= 7 {
 			return rows, err
-		}
-		if rows != nil {
-			rows.Close()
 		}
 		timer := time.NewTimer((5 * time.Millisecond) << attempt)
 		select {

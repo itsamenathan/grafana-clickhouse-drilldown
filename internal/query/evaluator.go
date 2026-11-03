@@ -22,8 +22,9 @@ type evaluatorStage struct {
 
 // Evaluator is request-local, not concurrent. It executes the exact validated
 // Loki stage implementations as residual predicates over a bounded SQL scan.
-// No endpoint may bypass it, and overflowing a scan is an error, never partial
-// success. No line-changing stage is supported by this implementation.
+// Aggregation bypasses it only after proving that SQL implements every stage.
+// Overflowing a scan is an error, never partial success. No line-changing
+// stage is supported by this implementation.
 type Evaluator struct{ stages []evaluatorStage }
 
 func (s Selection) NewEvaluator() (*Evaluator, error) {

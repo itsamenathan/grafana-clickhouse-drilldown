@@ -8,6 +8,14 @@ license text, and exceptions:
 - https://github.com/grafana/loki/blob/v3.7.9/LICENSE
 - https://github.com/grafana/loki/blob/v3.7.9/LICENSING.md
 
+Pattern detection uses Loki's `pkg/pattern/drain` from the same pinned
+release. Its Drain source carries an MIT notice (Copyright 2022 faceair) within
+Loki's AGPL-3.0-only tree. It adds `github.com/buger/jsonparser` v1.1.2 (MIT)
+and Loki's `logproto` and pattern iterator packages to the binary. The tail
+websocket uses `github.com/gorilla/websocket`
+v1.5.4-0.20250319132907-e064f32e3674 (BSD-2-Clause), the version already
+pinned by Loki's module graph. Together they add 13 packages.
+
 The database client is `github.com/ClickHouse/clickhouse-go/v2` v2.40.3,
 under Apache-2.0. Its `LICENSE` accompanies packaging. Source headers refer to
 a NOTICE, but no separate NOTICE file is present in the pinned module release:

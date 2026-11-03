@@ -1,0 +1,68 @@
+ M AGENTS.md
+ M README.md
+ M THIRD_PARTY.md
+ M cmd/adapter/main.go
+ M deploy/compose.yaml
+ M docs/compatibility.md
+ M docs/operations.md
+ M docs/security.md
+ M go.mod
+ M go.sum
+ M internal/engine/engine.go
+ M internal/engine/results.go
+ M internal/engine/results_test.go
+ M internal/httpapi/contracts_integration_test.go
+ M internal/httpapi/differential_integration_test.go
+ M internal/httpapi/discovery.go
+ M internal/httpapi/limits_test.go
+ M internal/httpapi/params.go
+ M internal/httpapi/query.go
+ M internal/httpapi/server.go
+ M internal/httpapi/server_test.go
+ M internal/httpapi/volume.go
+ M internal/query/evaluator.go
+ M internal/query/evaluator_test.go
+ M internal/query/query.go
+ M internal/record/record.go
+ M internal/sqlgen/compile.go
+ M internal/sqlgen/compile_test.go
+ M internal/sqlgen/selection.go
+ M internal/sqlgen/selection_integration_test.go
+ M internal/sqlgen/selection_test.go
+ M internal/storage/client.go
+ M internal/storage/client_integration_test.go
+ M internal/storage/client_test.go
+ M internal/storage/retry.go
+ M internal/storage/retry_test.go
+ M internal/storage/scan.go
+ M internal/storage/summary.go
+ M testdata/fixtures/README.md
+ M testdata/fixtures/compose.yaml
+ M testdata/fixtures/init.sql
+ M tools/verify-live.py
+?? cmd/adapter/main_test.go
+?? docs/metric-pushdown.md
+?? internal/engine/metrics_pushdown_integration_test.go
+?? internal/engine/metrics_pushdown_test.go
+?? internal/engine/patterns.go
+?? internal/engine/patterns_test.go
+?? internal/engine/streaming_test.go
+?? internal/httpapi/patterns.go
+?? internal/httpapi/patterns_test.go
+?? internal/httpapi/tail.go
+?? internal/httpapi/tail_test.go
+?? internal/limits/config.go
+?? internal/query/parser_drop_test.go
+?? internal/query/pushdown.go
+?? internal/query/pushdown_test.go
+?? internal/sqlgen/prefilter_integration_test.go
+?? internal/sqlgen/prefilter_test.go
+?? internal/sqlgen/service.go
+?? internal/sqlgen/service_integration_test.go
+?? internal/sqlgen/service_test.go
+?? internal/storage/limits.go
+?? internal/storage/limits_test.go
+?? internal/storage/metrics.go
+?? testdata/bench/
+?? tools/bench/
+?? tools/browser-patterns-live.cjs

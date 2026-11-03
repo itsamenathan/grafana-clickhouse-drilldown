@@ -4,8 +4,6 @@ package storage
 import (
 	"context"
 	"errors"
-	"strconv"
-	"time"
 	"unicode/utf8"
 
 	"github.com/ClickHouse/clickhouse-go/v2"
@@ -20,9 +18,10 @@ import (
 // Reader memory, execution/read limits and admission remain unchanged. This
 // must never receive a selection with unevaluated residual pipeline stages.
 func (c *Client) Summarize(ctx context.Context, predicate sqlgen.Predicate, start, end int64) ([]record.ServiceSummary, error) {
-	if start < 0 || end < start || end-start > int64(time.Hour) {
+	if !c.validRange(start, end) {
 		return nil, errors.New("invalid summary time range")
 	}
+	predicate = c.service.Bind(predicate)
 	result := []record.ServiceSummary{}
 	if start == end {
 		return result, nil
@@ -32,16 +31,14 @@ func (c *Client) Summarize(ctx context.Context, predicate sqlgen.Predicate, star
 		return nil, err
 	}
 	defer release()
-	parameters := clickhouse.Parameters{}
-	for key, value := range predicate.Parameters {
-		parameters[key] = value
+	queryCtx := clickhouse.Context(chcontext.ReadOnly(ctx), clickhouse.WithParameters(scanParameters(predicate, window{start, end})))
+	byteTotal := "sum(length(Body))"
+	if predicate.CountOnly {
+		byteTotal = "toUInt64(0)"
 	}
-	parameters["start_ns"], parameters["end_ns"] = strconv.FormatInt(start, 10), strconv.FormatInt(end, 10)
-	ctx = clickhouse.Context(chcontext.ReadOnly(ctx), clickhouse.WithParameters(parameters))
-	statement := "SELECT " + sqlgen.ServiceExpression + " AS service_name, count(), sum(length(Body)) FROM " + c.table +
-		" WHERE Timestamp >= fromUnixTimestamp64Nano({start_ns:Int64}) AND Timestamp < fromUnixTimestamp64Nano({end_ns:Int64}) AND (" + predicate.SQL +
-		") GROUP BY service_name ORDER BY service_name LIMIT 5001"
-	rows, err := retryBusy(ctx, func() (driver.Rows, error) { return c.conn.Query(ctx, statement) })
+	statement := "SELECT " + c.service.Expression() + " AS service_name, count(), " + byteTotal + " FROM " + c.table +
+		" WHERE " + timeCondition + " AND (" + predicate.SQL + ") GROUP BY service_name ORDER BY service_name LIMIT 5001"
+	rows, err := retryBusy(queryCtx, func() (driver.Rows, error) { return c.conn.Query(queryCtx, statement) })
 	if err != nil {
 		return nil, queryError(ctx, err)
 	}
@@ -56,7 +53,7 @@ func (c *Client) Summarize(ctx context.Context, predicate sqlgen.Predicate, star
 			return nil, errors.New("ClickHouse summary schema mismatch")
 		}
 		size += len(summary.Service) + 64
-		if !utf8.ValidString(summary.Service) || len(summary.Service) > MaxRecordBytes || size > MaxScanBytes || len(result) >= 5000 {
+		if !utf8.ValidString(summary.Service) || len(summary.Service) > c.limits.MaxRecordBytes || size > c.limits.MaxPageDecodedBytes || len(result) >= 5000 {
 			return nil, errors.New("service summary exceeds bounded result budget")
 		}
 		result = append(result, summary)

@@ -33,6 +33,22 @@ although `docker` itself is not on PATH. Substitute
 `/usr/libexec/docker/cli-plugins/docker-compose` for `docker compose` in the
 commands above.
 
+## Tables
+
+- `otel_logs`: mixed services, nested JSON, logfmt, empty and dotted keys,
+  levels, quotes, Unicode, boundaries and duplicates.
+- `otel_logs_unique`: the same rows without exact duplicates, for Loki
+  differential tests.
+- `otel_logs_large`: 1,000 rows of 6,000 bytes, beyond one 4 MiB reader
+  result, for paged scans.
+- `otel_logs_patterns`: two repeating templates of 40 lines each and rare
+  templates below Loki's 30-sample pattern threshold.
+- `otel_logs_tie`: 4,001 rows at one nanosecond, more than one page can hold.
+
+Browser checks of Explore's live tail need rows with current timestamps.
+Insert synthetic rows into the local fixture as `fixture_admin` while the
+check runs; never point this at production.
+
 ## Verification on 2026-10-22
 
 The user enabled host CPU passthrough after the initial AVX failure. A live
@@ -74,3 +90,11 @@ requests were canceled, not counted as successes. Passing the
 fixture tests does not establish full LogQL or live deployment compatibility.
 No production service was changed. The earlier AVX failure was resolved without
 changing the pinned database image or using a remote fixture host.
+
+The adapter fixture explicitly sets
+`ADAPTER_SERVICE_NAME_ATTRIBUTES=journald.CONTAINER_NAME,journald._SYSTEMD_UNIT`.
+An unconfigured adapter uses `ServiceName`. Parser guard fixtures cover reserved,
+sanitized, nested and escaped label names. The small reader uses a different
+read-only profile with 100 result rows and 1 MiB, proving client settings do not
+need to match the server. The unsafe reader deliberately uses result overflow
+`break` and must fail adapter startup.

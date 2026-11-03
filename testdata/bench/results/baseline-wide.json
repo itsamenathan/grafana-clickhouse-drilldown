@@ -1,0 +1,126 @@
+{
+  "started": "2026-10-27T15:46:59.54885206Z",
+  "finished": "2026-10-27T15:47:29.604715583Z",
+  "reader": "bench_reader_wide",
+  "target": "http://127.0.0.1:29100",
+  "adapter_binary_sha256": "e7ff24081b1e8e023a8ca9b52d9e2f36d2244e6b2ee8ce28fd93a6b44c915ef7",
+  "git_head": "bf1068b0b0e553400150d34601f09f945273fa77",
+  "git_diff_stat_start": "AGENTS.md                                         |  53 ++--\n README.md                                         |  61 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  89 +++++-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 184 +++++++----\n docs/operations.md                                | 235 +++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 291 ++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     | 106 +++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  75 ++++-\n internal/record/record.go                         |  24 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 135 +++++++-\n internal/sqlgen/selection_integration_test.go     |   4 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  22 +-\n internal/storage/client_integration_test.go       | 105 ++++++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 370 ++++++++++++++++++----\n internal/storage/summary.go                       |  18 +-\n testdata/fixtures/README.md                       |  16 +\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 41 files changed, 2122 insertions(+), 554 deletions(-)",
+  "git_diff_stat_end": "AGENTS.md                                         |  53 ++--\n README.md                                         |  61 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  89 +++++-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 184 +++++++----\n docs/operations.md                                | 235 +++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 291 ++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     | 106 +++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  75 ++++-\n internal/record/record.go                         |  24 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 135 +++++++-\n internal/sqlgen/selection_integration_test.go     |   4 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  22 +-\n internal/storage/client_integration_test.go       | 105 ++++++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 370 ++++++++++++++++++----\n internal/storage/summary.go                       |  18 +-\n testdata/fixtures/README.md                       |  16 +\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 41 files changed, 2122 insertions(+), 554 deletions(-)",
+  "build_diff_stat": " AGENTS.md                                         |  53 ++--\n README.md                                         |  55 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |   8 +-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 162 ++++++-----\n docs/operations.md                                | 199 ++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 195 +++++++------\n internal/engine/results.go                        | 212 +++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 103 ++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     |  71 +++--\n internal/httpapi/limits_test.go                   |  21 +-\n internal/httpapi/query.go                         |  40 ++-\n internal/httpapi/server.go                        |  21 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  69 +++--\n internal/query/evaluator_test.go                  |   8 +-\n internal/query/query.go                           |  71 ++++-\n internal/record/record.go                         |  14 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/storage/client_integration_test.go       |  36 +++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 327 +++++++++++++++++-----\n internal/storage/summary.go                       |  15 +-\n testdata/fixtures/README.md                       |  16 ++\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 34 files changed, 1331 insertions(+), 503 deletions(-)\n",
+  "dataset": {
+    "rows": 100000064,
+    "bytes_on_disk": 13952447887,
+    "uncompressed_bytes": 83334420403,
+    "parts": 182,
+    "requested_rows": 100000000,
+    "selected_rows": 100000000,
+    "scale": 1.0,
+    "days": 7,
+    "end": "2026-10-27T15:20:00+00:00",
+    "start": "2026-10-20T15:20:00+00:00",
+    "generation_seconds": 969.216,
+    "free_disk_before": 82591268864,
+    "available_ram_before": 10517307392,
+    "estimated_bytes_per_row": 139.788206,
+    "max_gib": 18.0,
+    "services": [
+      {
+        "service": "edge-gateway",
+        "rows": 59993476
+      },
+      {
+        "service": "checkout",
+        "rows": 15004356
+      },
+      {
+        "service": "payments",
+        "rows": 8999479
+      },
+      {
+        "service": "search",
+        "rows": 6004305
+      },
+      {
+        "service": "catalog",
+        "rows": 4000517
+      },
+      {
+        "service": "orders",
+        "rows": 2501332
+      },
+      {
+        "service": "inventory",
+        "rows": 1499181
+      },
+      {
+        "service": "auth",
+        "rows": 999747
+      },
+      {
+        "service": "notifications",
+        "rows": 498368
+      },
+      {
+        "service": "shipping",
+        "rows": 200324
+      },
+      {
+        "service": "billing",
+        "rows": 99788
+      },
+      {
+        "service": "recommendations",
+        "rows": 60000
+      },
+      {
+        "service": "audit",
+        "rows": 39984
+      },
+      {
+        "service": "scheduler",
+        "rows": 29531
+      },
+      {
+        "service": "backup",
+        "rows": 19811
+      },
+      {
+        "service": "cert-renewer",
+        "rows": 15037
+      },
+      {
+        "service": "dns-sync",
+        "rows": 11961
+      },
+      {
+        "service": "quota-cleaner",
+        "rows": 9955
+      },
+      {
+        "service": "report-exporter",
+        "rows": 7909
+      },
+      {
+        "service": "archive-sweeper",
+        "rows": 4939
+      }
+    ],
+    "total_generation_seconds": 1156.601,
+    "sql_sha256": "4632c32b1ab900e96925a73001818b42386886123abae61098d86837baf2045a",
+    "live_rows": 64
+  },
+  "notes": [
+    "Synthetic local data only. One request at a time. No production credentials or data.",
+    "A host-launched adapter has no production cgroup CPU or memory cap. The bench ClickHouse service is capped at two CPUs and 3 GiB.",
+    "Adapter peak is the process-lifetime high-water mark after each request, not a per-request allocation measurement. Zero means unavailable.",
+    "ClickHouse stats sum terminal QueryFinish/Exception rows for this reader within server-clock boundaries; query memory is the maximum across those rows. No QueryStart double counting.",
+    "The benchmark must be the only client using the selected bench reader. Readiness is outside query measurement intervals.",
+    "No cache flushing: results reflect normal warm/cold and background merge effects in matrix order. HTTP status and empty result counts are preserved without assuming success means correctness.",
+    "No matrix ran because readiness failed. Old adapter binaries hardcode max_rows_to_read=2000000; readonly=1 rejects their connection settings against the wider reader. Use a configurable build with matching ADAPTER_MAX_READ_ROWS."
+  ],
+  "results": [],
+  "readiness_error": "adapter /ready did not become healthy in 30s",
+  "reader_max_rows_to_read": 200000000,
+  "git_status_start": "M AGENTS.md\n M README.md\n M THIRD_PARTY.md\n M cmd/adapter/main.go\n M deploy/compose.yaml\n M docs/compatibility.md\n M docs/operations.md\n M docs/security.md\n M go.mod\n M go.sum\n M internal/engine/engine.go\n M internal/engine/results.go\n M internal/engine/results_test.go\n M internal/httpapi/contracts_integration_test.go\n M internal/httpapi/differential_integration_test.go\n M internal/httpapi/discovery.go\n M internal/httpapi/limits_test.go\n M internal/httpapi/params.go\n M internal/httpapi/query.go\n M internal/httpapi/server.go\n M internal/httpapi/server_test.go\n M internal/httpapi/volume.go\n M internal/query/evaluator.go\n M internal/query/evaluator_test.go\n M internal/query/query.go\n M internal/record/record.go\n M internal/sqlgen/compile.go\n M internal/sqlgen/compile_test.go\n M internal/sqlgen/selection.go\n M internal/sqlgen/selection_integration_test.go\n M internal/sqlgen/selection_test.go\n M internal/storage/client.go\n M internal/storage/client_integration_test.go\n M internal/storage/retry.go\n M internal/storage/retry_test.go\n M internal/storage/scan.go\n M internal/storage/summary.go\n M testdata/fixtures/README.md\n M testdata/fixtures/compose.yaml\n M testdata/fixtures/init.sql\n M tools/verify-live.py\n?? cmd/adapter/main_test.go\n?? internal/engine/metrics_pushdown_integration_test.go\n?? internal/engine/metrics_pushdown_test.go\n?? internal/engine/patterns.go\n?? internal/engine/patterns_test.go\n?? internal/engine/streaming_test.go\n?? internal/httpapi/patterns.go\n?? internal/httpapi/tail.go\n?? internal/httpapi/tail_test.go\n?? internal/limits/config.go\n?? internal/query/parser_drop_test.go\n?? internal/query/pushdown.go\n?? internal/query/pushdown_test.go\n?? internal/sqlgen/prefilter_integration_test.go\n?? internal/sqlgen/prefilter_test.go\n?? internal/storage/limits.go\n?? internal/storage/limits_test.go\n?? internal/storage/metrics.go\n?? testdata/bench/\n?? tools/bench/\n?? tools/browser-patterns-live.cjs"
+}

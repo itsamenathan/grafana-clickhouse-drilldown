@@ -1,0 +1,294 @@
+{
+  "reader_settings": {
+    "bench_reader": {
+      "max_threads": "1",
+      "max_concurrent_queries_for_user": "2",
+      "max_rows_to_read": "2000000",
+      "read_overflow_mode": "throw",
+      "max_result_rows": "10000",
+      "max_result_bytes": "4194304",
+      "result_overflow_mode": "throw",
+      "max_execution_time": "15",
+      "readonly": "1",
+      "max_memory_usage": "134217728"
+    },
+    "bench_reader_wide": {
+      "max_threads": "1",
+      "max_concurrent_queries_for_user": "2",
+      "max_rows_to_read": "200000000",
+      "read_overflow_mode": "throw",
+      "max_result_rows": "10000",
+      "max_result_bytes": "4194304",
+      "result_overflow_mode": "throw",
+      "max_execution_time": "15",
+      "readonly": "1",
+      "max_memory_usage": "134217728"
+    }
+  },
+  "bounds": {
+    "rows": 100000000,
+    "min_timestamp": "2026-10-20 15:20:00.000000000",
+    "max_timestamp": "2026-10-27 15:19:59.999700000"
+  },
+  "days": [
+    {
+      "day": "2026-10-20",
+      "rows": 4566867
+    },
+    {
+      "day": "2026-10-21",
+      "rows": 12646706
+    },
+    {
+      "day": "2026-10-22",
+      "rows": 12646707
+    },
+    {
+      "day": "2026-10-23",
+      "rows": 12646707
+    },
+    {
+      "day": "2026-10-24",
+      "rows": 12646706
+    },
+    {
+      "day": "2026-10-25",
+      "rows": 12646707
+    },
+    {
+      "day": "2026-10-26",
+      "rows": 12646706
+    },
+    {
+      "day": "2026-10-27",
+      "rows": 19552894
+    }
+  ],
+  "services": [
+    {
+      "service": "edge-gateway",
+      "rows": 59993476
+    },
+    {
+      "service": "checkout",
+      "rows": 15004356
+    },
+    {
+      "service": "payments",
+      "rows": 8999479
+    },
+    {
+      "service": "search",
+      "rows": 6004305
+    },
+    {
+      "service": "catalog",
+      "rows": 4000517
+    },
+    {
+      "service": "orders",
+      "rows": 2501332
+    },
+    {
+      "service": "inventory",
+      "rows": 1499181
+    },
+    {
+      "service": "auth",
+      "rows": 999747
+    },
+    {
+      "service": "notifications",
+      "rows": 498368
+    },
+    {
+      "service": "shipping",
+      "rows": 200324
+    },
+    {
+      "service": "billing",
+      "rows": 99788
+    },
+    {
+      "service": "recommendations",
+      "rows": 60000
+    },
+    {
+      "service": "audit",
+      "rows": 39984
+    },
+    {
+      "service": "scheduler",
+      "rows": 29531
+    },
+    {
+      "service": "backup",
+      "rows": 19811
+    },
+    {
+      "service": "cert-renewer",
+      "rows": 15037
+    },
+    {
+      "service": "dns-sync",
+      "rows": 11961
+    },
+    {
+      "service": "quota-cleaner",
+      "rows": 9955
+    },
+    {
+      "service": "report-exporter",
+      "rows": 7909
+    },
+    {
+      "service": "archive-sweeper",
+      "rows": 4939
+    }
+  ],
+  "last_15m_rates": [
+    {
+      "service": "edge-gateway",
+      "rows": 1799726,
+      "last_15m_lines_per_second": 1999.6955555555555
+    },
+    {
+      "service": "checkout",
+      "rows": 450037,
+      "last_15m_lines_per_second": 500.0411111111111
+    },
+    {
+      "service": "payments",
+      "rows": 269971,
+      "last_15m_lines_per_second": 299.96777777777777
+    },
+    {
+      "service": "search",
+      "rows": 180440,
+      "last_15m_lines_per_second": 200.48888888888888
+    },
+    {
+      "service": "catalog",
+      "rows": 119689,
+      "last_15m_lines_per_second": 132.98777777777778
+    },
+    {
+      "service": "orders",
+      "rows": 74932,
+      "last_15m_lines_per_second": 83.25777777777778
+    },
+    {
+      "service": "inventory",
+      "rows": 45398,
+      "last_15m_lines_per_second": 50.44222222222222
+    },
+    {
+      "service": "auth",
+      "rows": 30040,
+      "last_15m_lines_per_second": 33.37777777777778
+    },
+    {
+      "service": "notifications",
+      "rows": 14726,
+      "last_15m_lines_per_second": 16.362222222222222
+    },
+    {
+      "service": "shipping",
+      "rows": 6048,
+      "last_15m_lines_per_second": 6.72
+    },
+    {
+      "service": "billing",
+      "rows": 2943,
+      "last_15m_lines_per_second": 3.27
+    },
+    {
+      "service": "recommendations",
+      "rows": 1890,
+      "last_15m_lines_per_second": 2.1
+    },
+    {
+      "service": "audit",
+      "rows": 1229,
+      "last_15m_lines_per_second": 1.3655555555555556
+    },
+    {
+      "service": "scheduler",
+      "rows": 886,
+      "last_15m_lines_per_second": 0.9844444444444445
+    },
+    {
+      "service": "backup",
+      "rows": 593,
+      "last_15m_lines_per_second": 0.6588888888888889
+    },
+    {
+      "service": "cert-renewer",
+      "rows": 425,
+      "last_15m_lines_per_second": 0.4722222222222222
+    },
+    {
+      "service": "dns-sync",
+      "rows": 352,
+      "last_15m_lines_per_second": 0.39111111111111113
+    },
+    {
+      "service": "quota-cleaner",
+      "rows": 321,
+      "last_15m_lines_per_second": 0.3566666666666667
+    },
+    {
+      "service": "report-exporter",
+      "rows": 186,
+      "last_15m_lines_per_second": 0.20666666666666667
+    },
+    {
+      "service": "archive-sweeper",
+      "rows": 168,
+      "last_15m_lines_per_second": 0.18666666666666668
+    }
+  ],
+  "shape_sample_rows": 3000000,
+  "shape_sample_minutes": 15,
+  "shape": {
+    "min_log_attributes": 18,
+    "max_log_attributes": 18,
+    "min_resource_attributes": 12,
+    "max_resource_attributes": 12,
+    "json_rows": 1000028,
+    "logfmt_rows": 999086,
+    "plain_rows": 1000886,
+    "traced_rows": 749190,
+    "container_fallback_rows": 1000000,
+    "systemd_fallback_rows": 1000000
+  },
+  "levels": [
+    {
+      "level": "info",
+      "rows": 69996583
+    },
+    {
+      "level": "debug",
+      "rows": 25004082
+    },
+    {
+      "level": "warn",
+      "rows": 4001163
+    },
+    {
+      "level": "error",
+      "rows": 998172
+    }
+  ],
+  "table": {
+    "sorting_key": "toStartOfFiveMinutes(Timestamp), ServiceName, Timestamp",
+    "partition_key": "toDate(Timestamp)",
+    "engine": "MergeTree"
+  },
+  "size_after_merges": {
+    "rows": 100000064,
+    "bytes_on_disk": 13942543836,
+    "uncompressed_bytes": 83334333404,
+    "parts": 106
+  }
+}

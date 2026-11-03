@@ -12,25 +12,38 @@ import (
 
 	"grafana-clickhouse-drilldown/internal/engine"
 	"grafana-clickhouse-drilldown/internal/query"
+	"grafana-clickhouse-drilldown/internal/record"
 )
 
-func (a *queryAPI) selected(r *http.Request, start, end int64) ([]engine.Event, error) {
+// requestSource compiles query or repeated match[] selectors, the same
+// selection every discovery, field and volume endpoint streams.
+func requestSource(r *http.Request) (engine.Source, error) {
 	selections, err := requestSelections(r)
 	if err != nil {
-		return nil, err
+		return engine.Source{}, err
 	}
-	if r.Form.Has("match[]") {
-		return a.engine.LoadUnion(r.Context(), selections, start, end)
-	}
-	return a.engine.Load(r.Context(), selections[0], start, end)
+	return engine.CompileUnion(selections)
 }
 
-func (a *queryAPI) summarized(r *http.Request, start, end int64) ([]engine.ServiceSummary, bool, error) {
+func (a *queryAPI) summarized(r *http.Request, start, end int64, countOnly bool) ([]engine.ServiceSummary, bool, error) {
 	selections, err := requestSelections(r)
 	if err != nil {
 		return nil, true, err
 	}
-	return a.engine.Summarize(r.Context(), selections, start, end)
+	summaries, supported, err := a.engine.Summarize(r.Context(), selections, start, end, countOnly)
+	if err != nil || !supported {
+		return summaries, supported, err
+	}
+	retained := 0
+	for _, summary := range summaries {
+		// Include room for the labels/series derived from each summary.
+		if size := 2*len(summary.Service) + 1024; size > a.limits.MaxRetainedBytes-retained {
+			return nil, true, engine.ErrRetainedLimit
+		} else {
+			retained += size
+		}
+	}
+	return summaries, true, nil
 }
 
 func requestSelections(r *http.Request) ([]query.Selection, error) {
@@ -64,7 +77,7 @@ func (a *queryAPI) labels(w http.ResponseWriter, r *http.Request) {
 		fail(w, err)
 		return
 	}
-	start, end, err := bounds(r)
+	start, end, err := a.bounds(r)
 	if err != nil {
 		fail(w, err)
 		return
@@ -86,33 +99,61 @@ func (a *queryAPI) labels(w http.ResponseWriter, r *http.Request) {
 		fail(w, err)
 		return
 	}
-	summaries, summarized, err := a.summarized(r, start, end)
+	summaries, summarized, err := a.summarized(r, start, end, true)
 	if err != nil {
 		fail(w, err)
 		return
 	}
-	var events []engine.Event
+	series := map[string]map[string]string{}
+	retained := 0
+	addSeries := func(stream map[string]string) error {
+		key := engine.Key(stream)
+		if _, exists := series[key]; exists {
+			return nil
+		}
+		if len(series) >= 5000 {
+			return errors.New("too many series; narrow the selection")
+		}
+		size := len(key) + 256
+		for name, value := range stream {
+			size += len(name) + len(value) + 64
+		}
+		if size > a.limits.MaxRetainedBytes-retained {
+			return engine.ErrRetainedLimit
+		}
+		retained += size
+		series[key] = stream
+		return nil
+	}
 	if summarized {
 		for _, summary := range summaries {
-			event := engine.Event{}
-			event.Stream = map[string]string{}
+			stream := map[string]string{}
 			if summary.Service != "" {
-				event.Stream["service_name"] = summary.Service
+				stream["service_name"] = summary.Service
 			}
-			events = append(events, event)
+			if err := addSeries(stream); err != nil {
+				fail(w, err)
+				return
+			}
 		}
 	} else {
-		events, err = a.selected(r, start, end)
+		source, err := requestSource(r)
+		if err != nil {
+			fail(w, err)
+			return
+		}
+		// Stream labels are SQL-computed, so attribute maps are not read.
+		err = a.engine.Each(r.Context(), source, start, end, record.ScanOptions{}, func(event engine.Event) error {
+			return addSeries(event.Stream)
+		})
 		if err != nil {
 			fail(w, err)
 			return
 		}
 	}
 	labels := map[string]map[string]bool{}
-	series := map[string]map[string]string{}
-	for _, event := range events {
-		series[engine.Key(event.Stream)] = event.Stream
-		for name, value := range event.Stream {
+	for _, stream := range series {
+		for name, value := range stream {
 			if value == "" {
 				continue
 			}
@@ -196,7 +237,7 @@ func (a *queryAPI) fields(w http.ResponseWriter, r *http.Request) {
 		fail(w, err)
 		return
 	}
-	start, end, err := bounds(r)
+	start, end, err := a.bounds(r)
 	if err != nil {
 		fail(w, err)
 		return
@@ -215,16 +256,15 @@ func (a *queryAPI) fields(w http.ResponseWriter, r *http.Request) {
 		fail(w, err)
 		return
 	}
-	events, err := a.selected(r, start, end)
+	source, err := requestSource(r)
 	if err != nil {
 		fail(w, err)
 		return
 	}
-	if len(events) > lines {
-		events = events[len(events)-lines:]
-	}
+	// Describe the latest line_limit matching records, newest first.
 	fields := map[string]*fieldInfo{}
-	for _, event := range events {
+	seen, retained := 0, 0
+	err = a.engine.Each(r.Context(), source, start, end, record.ScanOptions{Backward: true, Metadata: true, EdgeWindows: true}, func(event engine.Event) error {
 		for i, values := range []map[string]string{event.Metadata, event.Parsed} {
 			for name, value := range values {
 				if strings.HasPrefix(name, "__") {
@@ -233,8 +273,7 @@ func (a *queryAPI) fields(w http.ResponseWriter, r *http.Request) {
 				info, exists := fields[name]
 				if !exists {
 					if len(fields) >= 1000 {
-						fail(w, errors.New("too many detected fields"))
-						return
+						return errors.New("too many detected fields")
 					}
 					info = &fieldInfo{typeName: fieldType(value), values: map[string]bool{}, parsers: map[string]bool{}}
 					fields[name] = info
@@ -247,12 +286,25 @@ func (a *queryAPI) fields(w http.ResponseWriter, r *http.Request) {
 						info.typeName = "string"
 					}
 				}
-				info.values[value] = true
+				if !info.values[value] {
+					if retained += len(name) + len(value) + 64; retained > a.limits.MaxRetainedBytes {
+						return engine.ErrRetainedLimit
+					}
+					info.values[value] = true
+				}
 				if i == 1 && event.Origins[name] != "" {
 					info.parsers[event.Origins[name]] = true
 				}
 			}
 		}
+		if seen++; seen >= lines {
+			return record.ErrStop
+		}
+		return nil
+	})
+	if err != nil {
+		fail(w, err)
+		return
 	}
 	if r.URL.Path != "/loki/api/v1/detected_fields" {
 		name := strings.TrimPrefix(r.URL.Path, "/loki/api/v1/detected_field/")

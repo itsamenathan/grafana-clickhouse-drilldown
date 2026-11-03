@@ -57,3 +57,23 @@ func TestBusyRetryIsBoundedAndCancelable(t *testing.T) {
 		t.Fatal("busy retry ignored the original deadline")
 	}
 }
+
+// nilRows mirrors the driver's typed nil *rows returned with an error.
+type nilRows struct{ driver.Rows }
+
+func (r *nilRows) Close() error { return r.Rows.Close() }
+
+func TestBusyRetryNeverClosesTypedNilRows(t *testing.T) {
+	calls := 0
+	_, err := retryBusy(context.Background(), func() (driver.Rows, error) {
+		calls++
+		if calls == 1 {
+			var rows *nilRows
+			return rows, &clickhouse.Exception{Code: 202}
+		}
+		return nil, nil
+	})
+	if err != nil || calls != 2 {
+		t.Fatalf("busy retry with typed nil rows: calls=%d err=%v", calls, err)
+	}
+}

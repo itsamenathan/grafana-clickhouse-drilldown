@@ -15,8 +15,11 @@ import (
 )
 
 type queryAPI struct {
-	engine *engine.Engine
-	db     Readiness
+	engine  *engine.Engine
+	db      Readiness
+	tails   chan struct{}
+	origins []string
+	limits  limits.Config
 }
 
 func fail(w http.ResponseWriter, err error) {
@@ -54,9 +57,12 @@ func (a *queryAPI) query(w http.ResponseWriter, r *http.Request) {
 			err = errors.New("instant queries use time, not start/end/step")
 		}
 	} else {
-		maximum := engine.MaxRange
-		if plan.Metric == nil && !plan.Health {
-			maximum = engine.MaxLogRange
+		maximum := a.limits.MaxQueryRange
+		if maximum > 0 && plan.Metric != nil {
+			if step, stepErr := duration(r.Form.Get("step"), time.Second); stepErr == nil {
+				// Grafana aligns both picker bounds outward to whole steps.
+				maximum += min(step, time.Duration(math.MaxInt64)-maximum)
+			}
 		}
 		start, end, err = boundsLimit(r, maximum)
 		if r.Form.Has("time") {
@@ -80,6 +86,10 @@ func (a *queryAPI) query(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if plan.Metric != nil {
+		if a.limits.MaxQueryRange > 0 && plan.Metric.Window > a.limits.MaxQueryRange {
+			fail(w, errors.New("metric window exceeds configured maximum query range"))
+			return
+		}
 		if !instant && !r.Form.Has("end") {
 			end = end / int64(time.Millisecond) * int64(time.Millisecond)
 		}
@@ -106,16 +116,16 @@ func (a *queryAPI) query(w http.ResponseWriter, r *http.Request) {
 			fail(w, errors.New("metric timestamps and steps must be millisecond-aligned; log timestamps retain nanoseconds"))
 			return
 		}
-		if start < int64(plan.Metric.Window) || end == math.MaxInt64 {
+		if end == math.MaxInt64 {
 			fail(w, errors.New("metric bounds exceed supported timestamps"))
 			return
 		}
-		events, err := a.engine.Load(r.Context(), plan.Selection, start-int64(plan.Metric.Window), end+1)
+		source, err := engine.Compile(plan.Selection)
 		if err != nil {
 			fail(w, err)
 			return
 		}
-		result, err := engine.Metrics(r.Context(), events, *plan.Metric, start, end, int64(step), instant)
+		result, err := a.engine.Metric(r.Context(), source, *plan.Metric, start, end, int64(step), instant)
 		if err != nil {
 			fail(w, err)
 			return
@@ -146,27 +156,28 @@ func (a *queryAPI) query(w http.ResponseWriter, r *http.Request) {
 	}
 	if r.Form.Has("step") {
 		// Loki does not apply step to log rows. Context nevertheless sends a
-		// step equal to its two-hour window; validate against the log bound.
-		if _, err := durationLimit(r.Form.Get("step"), time.Second, engine.MaxLogRange); err != nil {
+		// step equal to its context window; validate its syntax.
+		if _, err := duration(r.Form.Get("step"), time.Second); err != nil {
 			fail(w, err)
 			return
 		}
-	}
-	events, err := a.engine.LoadLogs(r.Context(), plan.Selection, start, end, direction, limit)
-	if err != nil {
-		fail(w, err)
-		return
 	}
 	flags := r.Header.Get("X-Loki-Response-Encoding-Flags")
 	if flags != "" && flags != "categorize-labels" {
 		fail(w, errors.New("unsupported response encoding flag"))
 		return
 	}
-	response := success("streams", engine.Logs(events, direction, limit, flags != ""))
-	if flags != "" {
-		response["data"].(map[string]any)["encodingFlags"] = []string{"categorize-labels"}
+	source, err := engine.Compile(plan.Selection)
+	if err != nil {
+		fail(w, err)
+		return
 	}
-	respond(w, http.StatusOK, response)
+	events, err := a.engine.Logs(r.Context(), source, start, end, direction, limit)
+	if err != nil {
+		fail(w, err)
+		return
+	}
+	respondStreams(w, engine.Streams(events, direction, limit, flags != ""), flags != "")
 }
 
 func (a *queryAPI) route(w http.ResponseWriter, r *http.Request) {
@@ -177,15 +188,14 @@ func (a *queryAPI) route(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		// This is the installed Drilldown 3.0.0 capability contract, not a
-		// claim that a pattern ingester or a Loki deployment exists. Declaring
-		// patterns disabled prevents unsupported background requests per source,
-		// without changing Grafana's global plugin settings.
+		// claim that a Loki deployment exists. Patterns are computed on demand
+		// from the selected range; nothing is persisted.
 		respond(w, http.StatusOK, map[string]any{
 			"version":                  "grafana-clickhouse-drilldown",
-			"pattern_ingester_enabled": false,
+			"pattern_ingester_enabled": true,
 			"limits": map[string]any{
-				"max_entries_limit_per_query": 2000, "max_query_length": "1h", "max_query_range": "1h",
-				"max_query_lookback": "0s", "query_timeout": "15s", "max_query_series": 1000,
+				"max_entries_limit_per_query": 2000, "max_query_length": a.limits.MaxQueryRange.String(), "max_query_range": a.limits.MaxQueryRange.String(),
+				"max_query_lookback": "0s", "query_timeout": a.limits.RequestTimeout.String(), "max_query_series": 1000,
 				"volume_enabled": true, "volume_max_series": 5000, "retention_period": "0s",
 				"pattern_persistence_enabled": false, "metric_aggregation_enabled": false,
 				"discover_log_levels": true, "max_line_size_truncate": false,
@@ -198,6 +208,8 @@ func (a *queryAPI) route(w http.ResponseWriter, r *http.Request) {
 		a.labels(w, r)
 	case path == "/loki/api/v1/detected_fields" || strings.HasPrefix(path, "/loki/api/v1/detected_field/"):
 		a.fields(w, r)
+	case path == "/loki/api/v1/patterns":
+		a.patterns(w, r)
 	case path == "/loki/api/v1/index/volume" || path == "/loki/api/v1/index/volume_range" || path == "/loki/api/v1/index/stats":
 		a.volume(w, r)
 	default:

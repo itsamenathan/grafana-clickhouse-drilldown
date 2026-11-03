@@ -43,7 +43,7 @@ func TestUnsupportedEndpointsNeverSucceed(t *testing.T) {
 	handler := New(readinessFunc(func(context.Context) error { return nil }), "dev")
 	for _, path := range []string{
 		"/loki/api/v1/query", "/loki/api/v1/query_range", "/loki/api/v1/labels",
-		"/loki/api/v1/patterns", "/loki/api/v1/push", "/loki/api/v1/tail", "/unknown",
+		"/loki/api/v1/patterns", "/loki/api/v1/push", "/loki/api/v1/tail", "/loki/api/v1/rules", "/unknown",
 	} {
 		response := httptest.NewRecorder()
 		handler.ServeHTTP(response, httptest.NewRequest("GET", path, nil))

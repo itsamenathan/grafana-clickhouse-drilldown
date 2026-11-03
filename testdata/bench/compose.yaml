@@ -1,0 +1,39 @@
+# Disposable synthetic LOCAL benchmark only. Never run on observability.
+name: drilldown-bench
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:26.9.20.23-alpine@sha256:ec6b774f7ea971007203e2fffa0349e0c3a40011a71765336162a2703abb4d33
+    environment:
+      CLICKHOUSE_USER: bench_admin
+      CLICKHOUSE_PASSWORD: bench-admin-not-production
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    ports:
+      - "127.0.0.1:29000:9000"
+      - "127.0.0.1:28123:8123"
+    volumes:
+      - data:/var/lib/clickhouse
+      - ./init.sql:/docker-entrypoint-initdb.d/01-bench.sql:ro
+      - ./server.xml:/etc/clickhouse-server/config.d/bench.xml:ro
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, "http://127.0.0.1:8123/ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+      start_period: 10s
+    mem_limit: 3g
+    cpus: 2
+    pids_limit: 512
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+volumes:
+  data:
+    # A named volume backed by a local disk directory. Create this directory
+    # before up. Override BENCH_DATA_DIR for a different disk with enough space.
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${BENCH_DATA_DIR:-/mnt/code/dev/frcv/grafana-clickhouse-drilldown/testdata/bench/.data}

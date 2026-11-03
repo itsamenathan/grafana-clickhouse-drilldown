@@ -1,0 +1,864 @@
+{
+  "started": "2026-10-27T16:40:18.945282588Z",
+  "finished": "2026-10-27T16:41:14.567769312Z",
+  "reader": "bench_reader_wide",
+  "target": "http://127.0.0.1:29100",
+  "git_head": "bf1068b0b0e553400150d34601f09f945273fa77",
+  "git_diff_stat_start": "AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 254 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  42 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2465 insertions(+), 591 deletions(-)",
+  "git_diff_stat_end": "AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 254 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  42 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2465 insertions(+), 591 deletions(-)",
+  "build_diff_stat": " AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 250 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  40 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2459 insertions(+), 591 deletions(-)\n",
+  "dataset": {
+    "rows": 100000064,
+    "bytes_on_disk": 13952447887,
+    "uncompressed_bytes": 83334420403,
+    "parts": 182,
+    "requested_rows": 100000000,
+    "selected_rows": 100000000,
+    "scale": 1.0,
+    "days": 7,
+    "end": "2026-10-27T15:20:00+00:00",
+    "start": "2026-10-20T15:20:00+00:00",
+    "generation_seconds": 969.216,
+    "free_disk_before": 82591268864,
+    "available_ram_before": 10517307392,
+    "estimated_bytes_per_row": 139.788206,
+    "max_gib": 18.0,
+    "services": [
+      {
+        "service": "edge-gateway",
+        "rows": 59993476
+      },
+      {
+        "service": "checkout",
+        "rows": 15004356
+      },
+      {
+        "service": "payments",
+        "rows": 8999479
+      },
+      {
+        "service": "search",
+        "rows": 6004305
+      },
+      {
+        "service": "catalog",
+        "rows": 4000517
+      },
+      {
+        "service": "orders",
+        "rows": 2501332
+      },
+      {
+        "service": "inventory",
+        "rows": 1499181
+      },
+      {
+        "service": "auth",
+        "rows": 999747
+      },
+      {
+        "service": "notifications",
+        "rows": 498368
+      },
+      {
+        "service": "shipping",
+        "rows": 200324
+      },
+      {
+        "service": "billing",
+        "rows": 99788
+      },
+      {
+        "service": "recommendations",
+        "rows": 60000
+      },
+      {
+        "service": "audit",
+        "rows": 39984
+      },
+      {
+        "service": "scheduler",
+        "rows": 29531
+      },
+      {
+        "service": "backup",
+        "rows": 19811
+      },
+      {
+        "service": "cert-renewer",
+        "rows": 15037
+      },
+      {
+        "service": "dns-sync",
+        "rows": 11961
+      },
+      {
+        "service": "quota-cleaner",
+        "rows": 9955
+      },
+      {
+        "service": "report-exporter",
+        "rows": 7909
+      },
+      {
+        "service": "archive-sweeper",
+        "rows": 4939
+      }
+    ],
+    "total_generation_seconds": 1156.601,
+    "sql_sha256": "4632c32b1ab900e96925a73001818b42386886123abae61098d86837baf2045a",
+    "live_rows": 64
+  },
+  "notes": [
+    "Synthetic local data only. One request at a time. No production credentials or data.",
+    "A host-launched adapter has no production cgroup CPU or memory cap. The bench ClickHouse service is capped at two CPUs and 3 GiB.",
+    "Adapter peak is the process-lifetime high-water mark after each request, not a per-request allocation measurement. Zero means unavailable.",
+    "ClickHouse stats sum terminal QueryFinish/Exception rows for this reader within server-clock boundaries; query memory is the maximum across those rows. No QueryStart double counting.",
+    "The benchmark must be the only client using the selected bench reader. Readiness is outside query measurement intervals.",
+    "No cache flushing: results reflect normal warm/cold and background merge effects in matrix order. HTTP status and empty result counts are preserved without assuming success means correctness.",
+    "Interrupted intermediate run, before unused body-byte aggregates were removed from count-only consumers. Superseded by optimized-final-*-wide-20261027. ADAPTER_SERVICE_NAME_ATTRIBUTES=journald.CONTAINER_NAME,journald._SYSTEMD_UNIT. No client ClickHouse settings."
+  ],
+  "results": [
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1511.332,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 36446208,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 1873624,
+        "read_bytes": 305453160,
+        "peak_query_memory_bytes": 10598149,
+        "sum_query_duration_ms": 1510
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 909.478,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 41672704,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 58
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1540.687,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 34747
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42237952,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 1894414,
+        "read_bytes": 311348579,
+        "peak_query_memory_bytes": 11190844,
+        "sum_query_duration_ms": 1536
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1589.192,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 451,
+        "items": 0,
+        "bytes": 9108
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42541056,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 1889069,
+        "read_bytes": 307560815,
+        "peak_query_memory_bytes": 10794611,
+        "sum_query_duration_ms": 1587
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 59.277,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42237952,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 40
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 173.594,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 50638848,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 86
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 176.982,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3337
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 54251520,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 85
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2289.176,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 93,
+        "items": 31,
+        "bytes": 9020
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 39,
+        "read_rows": 2542660,
+        "read_bytes": 137948344,
+        "peak_query_memory_bytes": 15035293,
+        "sum_query_duration_ms": 1853
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.262,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 209,
+        "read_rows": 45092732,
+        "read_bytes": 3520084095,
+        "peak_query_memory_bytes": 24039754,
+        "sum_query_duration_ms": 14822,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 390.223,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 533427,
+        "read_bytes": 81704066,
+        "peak_query_memory_bytes": 10622552,
+        "sum_query_duration_ms": 388
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 66.644,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10302926,
+        "sum_query_duration_ms": 46
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 496.455,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 33414
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 544125,
+        "read_bytes": 84474841,
+        "peak_query_memory_bytes": 11813785,
+        "sum_query_duration_ms": 493
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 458.399,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 451,
+        "items": 0,
+        "bytes": 8886
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 544125,
+        "read_bytes": 83456139,
+        "peak_query_memory_bytes": 10836374,
+        "sum_query_duration_ms": 456
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 207.528,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 139192,
+        "read_bytes": 51746258,
+        "peak_query_memory_bytes": 9977074,
+        "sum_query_duration_ms": 184
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 227.215,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 139192,
+        "read_bytes": 24761178,
+        "peak_query_memory_bytes": 14393853,
+        "sum_query_duration_ms": 162
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 187.759,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3337
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 23092166,
+        "peak_query_memory_bytes": 10111187,
+        "sum_query_duration_ms": 116
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 3381.04,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 269,
+        "items": 27,
+        "bytes": 10827
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 42,
+        "read_rows": 4548047,
+        "read_bytes": 186067352,
+        "peak_query_memory_bytes": 13505875,
+        "sum_query_duration_ms": 2949
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 6703.49,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 106,
+        "read_rows": 1861707,
+        "read_bytes": 1008422777,
+        "peak_query_memory_bytes": 25261261,
+        "sum_query_duration_ms": 4774
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 68.703,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 71494,
+        "read_bytes": 6133004,
+        "peak_query_memory_bytes": 5080437,
+        "sum_query_duration_ms": 67
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6498.412,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 7288734,
+        "read_bytes": 2663217910,
+        "peak_query_memory_bytes": 31167992,
+        "sum_query_duration_ms": 6460
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 88.884,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 151,
+        "items": 0,
+        "bytes": 2824
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 81890,
+        "read_bytes": 7204867,
+        "peak_query_memory_bytes": 5818937,
+        "sum_query_duration_ms": 86
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 154.095,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 137,
+        "items": 0,
+        "bytes": 2417
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 81890,
+        "read_bytes": 7121685,
+        "peak_query_memory_bytes": 5273236,
+        "sum_query_duration_ms": 152
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 3648.141,
+      "result": {
+        "rows": 21,
+        "series": 21,
+        "samples": 0,
+        "items": 0,
+        "bytes": 28658
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 6,
+        "read_rows": 6912269,
+        "read_bytes": 2024096644,
+        "peak_query_memory_bytes": 15250961,
+        "sum_query_duration_ms": 3638
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2152.022,
+      "result": {
+        "rows": 15,
+        "series": 15,
+        "samples": 0,
+        "items": 0,
+        "bytes": 23331
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 3613300,
+        "read_bytes": 126011148,
+        "peak_query_memory_bytes": 19245689,
+        "sum_query_duration_ms": 2130
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 431.609,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3312
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 185906,
+        "read_bytes": 69320827,
+        "peak_query_memory_bytes": 20292654,
+        "sum_query_duration_ms": 409
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 0,
+      "error_class": "transport",
+      "error": "Get \"http://127.0.0.1:29100/loki/api/v1/patterns?end=1793114400000000000&query=%7Bservice_name%3D%22archive-sweeper%22%7D&start=1793113500000000000&step=2s\": interrupt signal received",
+      "latency_ms": 4132.661,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 0
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 55259136,
+      "clickhouse": {
+        "queries": 0,
+        "read_rows": 0,
+        "read_bytes": 0,
+        "peak_query_memory_bytes": 0,
+        "sum_query_duration_ms": 0,
+        "collection_error": "Post \"http://127.0.0.1:28123/\": interrupt signal received"
+      }
+    }
+  ],
+  "reader_max_rows_to_read": 200000000,
+  "git_status_start": "M AGENTS.md\n M README.md\n M THIRD_PARTY.md\n M cmd/adapter/main.go\n M deploy/compose.yaml\n M docs/compatibility.md\n M docs/operations.md\n M docs/security.md\n M go.mod\n M go.sum\n M internal/engine/engine.go\n M internal/engine/results.go\n M internal/engine/results_test.go\n M internal/httpapi/contracts_integration_test.go\n M internal/httpapi/differential_integration_test.go\n M internal/httpapi/discovery.go\n M internal/httpapi/limits_test.go\n M internal/httpapi/params.go\n M internal/httpapi/query.go\n M internal/httpapi/server.go\n M internal/httpapi/server_test.go\n M internal/httpapi/volume.go\n M internal/query/evaluator.go\n M internal/query/evaluator_test.go\n M internal/query/query.go\n M internal/record/record.go\n M internal/sqlgen/compile.go\n M internal/sqlgen/compile_test.go\n M internal/sqlgen/selection.go\n M internal/sqlgen/selection_integration_test.go\n M internal/sqlgen/selection_test.go\n M internal/storage/client.go\n M internal/storage/client_integration_test.go\n M internal/storage/client_test.go\n M internal/storage/retry.go\n M internal/storage/retry_test.go\n M internal/storage/scan.go\n M internal/storage/summary.go\n M testdata/fixtures/README.md\n M testdata/fixtures/compose.yaml\n M testdata/fixtures/init.sql\n M tools/verify-live.py\n?? cmd/adapter/main_test.go\n?? docs/metric-pushdown.md\n?? internal/engine/metrics_pushdown_integration_test.go\n?? internal/engine/metrics_pushdown_test.go\n?? internal/engine/patterns.go\n?? internal/engine/patterns_test.go\n?? internal/engine/streaming_test.go\n?? internal/httpapi/patterns.go\n?? internal/httpapi/patterns_test.go\n?? internal/httpapi/tail.go\n?? internal/httpapi/tail_test.go\n?? internal/limits/config.go\n?? internal/query/parser_drop_test.go\n?? internal/query/pushdown.go\n?? internal/query/pushdown_test.go\n?? internal/sqlgen/prefilter_integration_test.go\n?? internal/sqlgen/prefilter_test.go\n?? internal/sqlgen/service.go\n?? internal/sqlgen/service_integration_test.go\n?? internal/sqlgen/service_test.go\n?? internal/storage/limits.go\n?? internal/storage/limits_test.go\n?? internal/storage/metrics.go\n?? testdata/bench/\n?? tools/bench/\n?? tools/browser-patterns-live.cjs",
+  "adapter_binary_sha256": "15ed67e76745d4c2dd245658aeafc3ac290d8d2bd04be675d8ea3029dfc82d27"
+}

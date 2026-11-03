@@ -11,3 +11,6 @@ node_modules
 **/node_modules
 *.out
 *.test
+testdata/bench/.data
+testdata/bench/results
+**/__pycache__

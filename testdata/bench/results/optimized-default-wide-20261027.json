@@ -1,0 +1,2245 @@
+{
+  "started": "2026-10-27T16:28:44.4228484Z",
+  "finished": "2026-10-27T16:31:01.706610066Z",
+  "reader": "bench_reader_wide",
+  "target": "http://127.0.0.1:29100",
+  "git_head": "bf1068b0b0e553400150d34601f09f945273fa77",
+  "git_diff_stat_start": "AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 250 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  38 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2457 insertions(+), 591 deletions(-)",
+  "git_diff_stat_end": "AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 250 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  38 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2457 insertions(+), 591 deletions(-)",
+  "build_diff_stat": " AGENTS.md                                         |  53 ++-\n README.md                                         |  66 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  96 +++++-\n deploy/compose.yaml                               |   3 +\n docs/compatibility.md                             | 208 ++++++++----\n docs/operations.md                                | 250 ++++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 305 +++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |  85 +++--\n internal/httpapi/discovery.go                     | 106 ++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  85 ++++-\n internal/record/record.go                         |  25 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 162 +++++++++-\n internal/sqlgen/selection_integration_test.go     |   6 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  86 ++++-\n internal/storage/client_integration_test.go       | 179 +++++++++++\n internal/storage/client_test.go                   |  14 +\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 375 ++++++++++++++++++----\n internal/storage/summary.go                       |  21 +-\n testdata/fixtures/README.md                       |  24 ++\n testdata/fixtures/compose.yaml                    |   3 +\n testdata/fixtures/init.sql                        |  38 +++\n tools/verify-live.py                              |  40 ++-\n 42 files changed, 2457 insertions(+), 591 deletions(-)\n",
+  "dataset": {
+    "rows": 100000064,
+    "bytes_on_disk": 13952447887,
+    "uncompressed_bytes": 83334420403,
+    "parts": 182,
+    "requested_rows": 100000000,
+    "selected_rows": 100000000,
+    "scale": 1.0,
+    "days": 7,
+    "end": "2026-10-27T15:20:00+00:00",
+    "start": "2026-10-20T15:20:00+00:00",
+    "generation_seconds": 969.216,
+    "free_disk_before": 82591268864,
+    "available_ram_before": 10517307392,
+    "estimated_bytes_per_row": 139.788206,
+    "max_gib": 18.0,
+    "services": [
+      {
+        "service": "edge-gateway",
+        "rows": 59993476
+      },
+      {
+        "service": "checkout",
+        "rows": 15004356
+      },
+      {
+        "service": "payments",
+        "rows": 8999479
+      },
+      {
+        "service": "search",
+        "rows": 6004305
+      },
+      {
+        "service": "catalog",
+        "rows": 4000517
+      },
+      {
+        "service": "orders",
+        "rows": 2501332
+      },
+      {
+        "service": "inventory",
+        "rows": 1499181
+      },
+      {
+        "service": "auth",
+        "rows": 999747
+      },
+      {
+        "service": "notifications",
+        "rows": 498368
+      },
+      {
+        "service": "shipping",
+        "rows": 200324
+      },
+      {
+        "service": "billing",
+        "rows": 99788
+      },
+      {
+        "service": "recommendations",
+        "rows": 60000
+      },
+      {
+        "service": "audit",
+        "rows": 39984
+      },
+      {
+        "service": "scheduler",
+        "rows": 29531
+      },
+      {
+        "service": "backup",
+        "rows": 19811
+      },
+      {
+        "service": "cert-renewer",
+        "rows": 15037
+      },
+      {
+        "service": "dns-sync",
+        "rows": 11961
+      },
+      {
+        "service": "quota-cleaner",
+        "rows": 9955
+      },
+      {
+        "service": "report-exporter",
+        "rows": 7909
+      },
+      {
+        "service": "archive-sweeper",
+        "rows": 4939
+      }
+    ],
+    "total_generation_seconds": 1156.601,
+    "sql_sha256": "4632c32b1ab900e96925a73001818b42386886123abae61098d86837baf2045a",
+    "live_rows": 64
+  },
+  "notes": [
+    "Synthetic local data only. One request at a time. No production credentials or data.",
+    "A host-launched adapter has no production cgroup CPU or memory cap. The bench ClickHouse service is capped at two CPUs and 3 GiB.",
+    "Adapter peak is the process-lifetime high-water mark after each request, not a per-request allocation measurement. Zero means unavailable.",
+    "ClickHouse stats sum terminal QueryFinish/Exception rows for this reader within server-clock boundaries; query memory is the maximum across those rows. No QueryStart double counting.",
+    "The benchmark must be the only client using the selected bench reader. Readiness is outside query measurement intervals.",
+    "No cache flushing: results reflect normal warm/cold and background merge effects in matrix order. HTTP status and empty result counts are preserved without assuming success means correctness.",
+    "Incomplete exploratory run, interrupted after identifying escaped-slash false positives in the initial all-backslash parser guard. Superseded by optimized-*-wide-20261027b. Default ServiceName mapping, no client ClickHouse settings. Frozen binary adapter-optimized-20261027."
+  ],
+  "results": [
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 280.195,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 36560896,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 685782,
+        "read_bytes": 96159113,
+        "peak_query_memory_bytes": 5095120,
+        "sum_query_duration_ms": 278
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 889.941,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 141015
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42143744,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 10400,
+        "read_bytes": 7694490,
+        "peak_query_memory_bytes": 10118461,
+        "sum_query_duration_ms": 35
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 247.502,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 33569
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42344448,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 685782,
+        "read_bytes": 97978711,
+        "peak_query_memory_bytes": 6943712,
+        "sum_query_duration_ms": 240
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 2090.469,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 59,
+        "read_rows": 4962647,
+        "read_bytes": 297592958,
+        "peak_query_memory_bytes": 5751288,
+        "sum_query_duration_ms": 1491
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 98.66,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 132533
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 5585200,
+        "sum_query_duration_ms": 69
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 138.483,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 152330
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 10043207,
+        "sum_query_duration_ms": 60
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 149.133,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3159
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 10043023,
+        "sum_query_duration_ms": 60
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 799.246,
+      "result": {
+        "rows": 0,
+        "series": 30,
+        "samples": 239,
+        "items": 30,
+        "bytes": 11093
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 38,
+        "read_rows": 446862,
+        "read_bytes": 56740493,
+        "peak_query_memory_bytes": 2061139,
+        "sum_query_duration_ms": 335
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 5211.774,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 80,
+        "read_rows": 5493053,
+        "read_bytes": 802361263,
+        "peak_query_memory_bytes": 19717706,
+        "sum_query_duration_ms": 3199
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 53.584,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 248117,
+        "read_bytes": 27537585,
+        "peak_query_memory_bytes": 5368166,
+        "sum_query_duration_ms": 52
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 48.802,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 140977
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 10794,
+        "read_bytes": 7956493,
+        "peak_query_memory_bytes": 10132689,
+        "sum_query_duration_ms": 28
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 76.481,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1793,
+        "items": 0,
+        "bytes": 32491
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 248117,
+        "read_bytes": 28345966,
+        "peak_query_memory_bytes": 6577581,
+        "sum_query_duration_ms": 72
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 769.772,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 451,
+        "items": 0,
+        "bytes": 8657
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 42,
+        "read_rows": 2321098,
+        "read_bytes": 124207683,
+        "peak_query_memory_bytes": 5555240,
+        "sum_query_duration_ms": 527
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 119.077,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 132220
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 21588,
+        "read_bytes": 15912986,
+        "peak_query_memory_bytes": 5573932,
+        "sum_query_duration_ms": 96
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 191.7,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 150693
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 21588,
+        "read_bytes": 15912986,
+        "peak_query_memory_bytes": 10052503,
+        "sum_query_duration_ms": 127
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 209.202,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3159
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 6,
+        "read_rows": 32382,
+        "read_bytes": 23869479,
+        "peak_query_memory_bytes": 10057335,
+        "sum_query_duration_ms": 126
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 890.113,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 42,
+        "read_rows": 517141,
+        "read_bytes": 68714421,
+        "peak_query_memory_bytes": 5379819,
+        "sum_query_duration_ms": 398
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 4140.716,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 78,
+        "read_rows": 4912584,
+        "read_bytes": 472404665,
+        "peak_query_memory_bytes": 19336240,
+        "sum_query_duration_ms": 2300
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 17.986,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 59653,
+        "read_bytes": 1472803,
+        "peak_query_memory_bytes": 382042,
+        "sum_query_duration_ms": 16
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 343.639,
+      "result": {
+        "rows": 56,
+        "series": 56,
+        "samples": 0,
+        "items": 0,
+        "bytes": 81148
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 120135,
+        "read_bytes": 61339655,
+        "peak_query_memory_bytes": 23557734,
+        "sum_query_duration_ms": 323
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 21.415,
+      "result": {
+        "rows": 0,
+        "series": 3,
+        "samples": 56,
+        "items": 0,
+        "bytes": 1160
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 59653,
+        "read_bytes": 1559544,
+        "peak_query_memory_bytes": 5990475,
+        "sum_query_duration_ms": 19
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 50.587,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 54,
+        "items": 0,
+        "bytes": 1006
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 158384,
+        "read_bytes": 4310883,
+        "peak_query_memory_bytes": 5815451,
+        "sum_query_duration_ms": 47
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 133.208,
+      "result": {
+        "rows": 8,
+        "series": 8,
+        "samples": 0,
+        "items": 0,
+        "bytes": 10718
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 6,
+        "read_rows": 139570,
+        "read_bytes": 13790954,
+        "peak_query_memory_bytes": 5365912,
+        "sum_query_duration_ms": 127
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 171.931,
+      "result": {
+        "rows": 6,
+        "series": 6,
+        "samples": 0,
+        "items": 0,
+        "bytes": 9232
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 89816,
+        "read_bytes": 13205165,
+        "peak_query_memory_bytes": 9616940,
+        "sum_query_duration_ms": 159
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 183.305,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3129
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 9,
+        "read_rows": 89816,
+        "read_bytes": 13205165,
+        "peak_query_memory_bytes": 9616940,
+        "sum_query_duration_ms": 168
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 134.83,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 18,
+        "read_rows": 192966,
+        "read_bytes": 14947549,
+        "peak_query_memory_bytes": 992050,
+        "sum_query_duration_ms": 120
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 111.224,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 23,
+        "items": 0,
+        "bytes": 604
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 78156,
+        "read_bytes": 13874224,
+        "peak_query_memory_bytes": 16184113,
+        "sum_query_duration_ms": 107
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 657.772,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 82
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3472051,
+        "read_bytes": 463211075,
+        "peak_query_memory_bytes": 384657,
+        "sum_query_duration_ms": 656
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 183.568,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145107
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 64486678,
+        "peak_query_memory_bytes": 18270984,
+        "sum_query_duration_ms": 159
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 903.188,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 34984
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3477512,
+        "read_bytes": 479693977,
+        "peak_query_memory_bytes": 6906695,
+        "sum_query_duration_ms": 899
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.144,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 276,
+        "read_rows": 202142555,
+        "read_bytes": 6098272251,
+        "peak_query_memory_bytes": 5606421,
+        "sum_query_duration_ms": 14745
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 409.701,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135962
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62298914,
+        "peak_query_memory_bytes": 14646556,
+        "sum_query_duration_ms": 174
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 315.675,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155612
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 93400471,
+        "peak_query_memory_bytes": 19309438,
+        "sum_query_duration_ms": 226
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 354.592,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3341
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 93400471,
+        "peak_query_memory_bytes": 19309254,
+        "sum_query_duration_ms": 270
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1128.139,
+      "result": {
+        "rows": 0,
+        "series": 40,
+        "samples": 80,
+        "items": 40,
+        "bytes": 10262
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 34,
+        "read_rows": 2247997,
+        "read_bytes": 278111514,
+        "peak_query_memory_bytes": 5163236,
+        "sum_query_duration_ms": 666
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.314,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 73,
+        "read_rows": 12257233,
+        "read_bytes": 6823763740,
+        "peak_query_memory_bytes": 21099678,
+        "sum_query_duration_ms": 14949
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "15m",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 546.032,
+      "result": {
+        "rows": 0,
+        "series": 40,
+        "samples": 40,
+        "items": 0,
+        "bytes": 2984
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3002267,
+        "read_bytes": 458983019,
+        "peak_query_memory_bytes": 4648973,
+        "sum_query_duration_ms": 542
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 513.534,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 2516402,
+        "read_bytes": 380620227,
+        "peak_query_memory_bytes": 5592167,
+        "sum_query_duration_ms": 512
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 48.202,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 141015
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 10400,
+        "read_bytes": 7694490,
+        "peak_query_memory_bytes": 10117053,
+        "sum_query_duration_ms": 27
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 714.28,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 28048
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 66592768,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 2518098,
+        "read_bytes": 385862616,
+        "peak_query_memory_bytes": 6867570,
+        "sum_query_duration_ms": 710
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 7344.306,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 597,
+        "read_rows": 33601838,
+        "read_bytes": 1836722054,
+        "peak_query_memory_bytes": 5795777,
+        "sum_query_duration_ms": 6414
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 79.625,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 132533
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 5585016,
+        "sum_query_duration_ms": 57
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 147.353,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 152330
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 10043023,
+        "sum_query_duration_ms": 67
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 151.897,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3159
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 20800,
+        "read_bytes": 15388980,
+        "peak_query_memory_bytes": 10043023,
+        "sum_query_duration_ms": 66
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 852.689,
+      "result": {
+        "rows": 0,
+        "series": 30,
+        "samples": 239,
+        "items": 30,
+        "bytes": 11093
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 38,
+        "read_rows": 446862,
+        "read_bytes": 56740493,
+        "peak_query_memory_bytes": 2061139,
+        "sum_query_duration_ms": 375
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.03,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 517,
+        "read_rows": 9000370,
+        "read_bytes": 5141812243,
+        "peak_query_memory_bytes": 23284590,
+        "sum_query_duration_ms": 14302
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 209.543,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 721613,
+        "read_bytes": 104766458,
+        "peak_query_memory_bytes": 6396336,
+        "sum_query_duration_ms": 208
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 47.562,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 140977
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 10794,
+        "read_bytes": 7956493,
+        "peak_query_memory_bytes": 10131281,
+        "sum_query_duration_ms": 27
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 244.366,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 27314
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 68800512,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 723309,
+        "read_bytes": 106398925,
+        "peak_query_memory_bytes": 7632694,
+        "sum_query_duration_ms": 241
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 1362.531,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 60,
+        "read_rows": 3498535,
+        "read_bytes": 298096573,
+        "peak_query_memory_bytes": 5592824,
+        "sum_query_duration_ms": 1005
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 66.35,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 132220
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 21588,
+        "read_bytes": 15912986,
+        "peak_query_memory_bytes": 5573748,
+        "sum_query_duration_ms": 49
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 132.123,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 150693
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 21588,
+        "read_bytes": 15912986,
+        "peak_query_memory_bytes": 10052503,
+        "sum_query_duration_ms": 58
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 207.02,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3159
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 6,
+        "read_rows": 32382,
+        "read_bytes": 23869479,
+        "peak_query_memory_bytes": 10057151,
+        "sum_query_duration_ms": 95
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 880.361,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 42,
+        "read_rows": 517141,
+        "read_bytes": 68714421,
+        "peak_query_memory_bytes": 5379771,
+        "sum_query_duration_ms": 418
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 5270.664,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 81,
+        "read_rows": 3364942,
+        "read_bytes": 793114191,
+        "peak_query_memory_bytes": 24537993,
+        "sum_query_duration_ms": 3343
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 38.845,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 86311,
+        "read_bytes": 2395581,
+        "peak_query_memory_bytes": 5160173,
+        "sum_query_duration_ms": 36
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 536.595,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144122
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 11,
+        "read_rows": 242144,
+        "read_bytes": 111710705,
+        "peak_query_memory_bytes": 23518118,
+        "sum_query_duration_ms": 504
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 39.276,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 180,
+        "items": 0,
+        "bytes": 3317
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 86311,
+        "read_bytes": 2425997,
+        "peak_query_memory_bytes": 6115850,
+        "sum_query_duration_ms": 36
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 85.084,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 160,
+        "items": 0,
+        "bytes": 2808
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 258925,
+        "read_bytes": 7217151,
+        "peak_query_memory_bytes": 5948108,
+        "sum_query_duration_ms": 80
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 325.527,
+      "result": {
+        "rows": 29,
+        "series": 29,
+        "samples": 0,
+        "items": 0,
+        "bytes": 38576
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 8,
+        "read_rows": 227268,
+        "read_bytes": 20698342,
+        "peak_query_memory_bytes": 10303279,
+        "sum_query_duration_ms": 311
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 333.901,
+      "result": {
+        "rows": 22,
+        "series": 22,
+        "samples": 0,
+        "items": 0,
+        "bytes": 33552
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 11,
+        "read_rows": 213830,
+        "read_bytes": 27086815,
+        "peak_query_memory_bytes": 9919159,
+        "sum_query_duration_ms": 307
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 343.692,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 39,
+        "bytes": 3134
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 11,
+        "read_rows": 213830,
+        "read_bytes": 27086815,
+        "peak_query_memory_bytes": 12677364,
+        "sum_query_duration_ms": 316
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 242.717,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 418874,
+        "read_bytes": 24211625,
+        "peak_query_memory_bytes": 6175259,
+        "sum_query_duration_ms": 220
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 212.702,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 75,
+        "items": 0,
+        "bytes": 1837
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 172606,
+        "read_bytes": 22158864,
+        "peak_query_memory_bytes": 18093057,
+        "sum_query_duration_ms": 205
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2318.269,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 82
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 1834630457,
+        "peak_query_memory_bytes": 4949765,
+        "sum_query_duration_ms": 2317
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 195.771,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145107
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 64486678,
+        "peak_query_memory_bytes": 18250200,
+        "sum_query_duration_ms": 176
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 3132.561,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 29132
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12001696,
+        "read_bytes": 1858892812,
+        "peak_query_memory_bytes": 5486282,
+        "sum_query_duration_ms": 3128
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.43,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 222,
+        "read_rows": 140808418,
+        "read_bytes": 8323285582,
+        "peak_query_memory_bytes": 5512791,
+        "sum_query_duration_ms": 14805
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 231.211,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135962
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62298914,
+        "peak_query_memory_bytes": 14646556,
+        "sum_query_duration_ms": 209
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 315.649,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155612
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 93400471,
+        "peak_query_memory_bytes": 19309254,
+        "sum_query_duration_ms": 235
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 301.093,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3341
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 93400471,
+        "peak_query_memory_bytes": 19309414,
+        "sum_query_duration_ms": 206
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1151.621,
+      "result": {
+        "rows": 0,
+        "series": 40,
+        "samples": 80,
+        "items": 40,
+        "bytes": 10262
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 34,
+        "read_rows": 2247997,
+        "read_bytes": 278111514,
+        "peak_query_memory_bytes": 5163236,
+        "sum_query_duration_ms": 684
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.801,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 11403008,
+        "read_bytes": 8468042358,
+        "peak_query_memory_bytes": 20520989,
+        "sum_query_duration_ms": 15003,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.355 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "1h",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2111.498,
+      "result": {
+        "rows": 0,
+        "series": 40,
+        "samples": 40,
+        "items": 0,
+        "bytes": 3007
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 1834630457,
+        "peak_query_memory_bytes": 4946749,
+        "sum_query_duration_ms": 2109
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "6h",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 0,
+      "error_class": "transport",
+      "error": "Get \"http://127.0.0.1:29100/loki/api/v1/detected_labels?end=1793114400000000000&query=%7Bservice_name%3D%22edge-gateway%22%7D&start=1793092800000000000\": interrupt signal received",
+      "latency_ms": 660.314,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 0
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 70082560,
+      "clickhouse": {
+        "queries": 0,
+        "read_rows": 0,
+        "read_bytes": 0,
+        "peak_query_memory_bytes": 0,
+        "sum_query_duration_ms": 0,
+        "collection_error": "Post \"http://127.0.0.1:28123/\": interrupt signal received"
+      }
+    }
+  ],
+  "reader_max_rows_to_read": 200000000,
+  "git_status_start": "M AGENTS.md\n M README.md\n M THIRD_PARTY.md\n M cmd/adapter/main.go\n M deploy/compose.yaml\n M docs/compatibility.md\n M docs/operations.md\n M docs/security.md\n M go.mod\n M go.sum\n M internal/engine/engine.go\n M internal/engine/results.go\n M internal/engine/results_test.go\n M internal/httpapi/contracts_integration_test.go\n M internal/httpapi/differential_integration_test.go\n M internal/httpapi/discovery.go\n M internal/httpapi/limits_test.go\n M internal/httpapi/params.go\n M internal/httpapi/query.go\n M internal/httpapi/server.go\n M internal/httpapi/server_test.go\n M internal/httpapi/volume.go\n M internal/query/evaluator.go\n M internal/query/evaluator_test.go\n M internal/query/query.go\n M internal/record/record.go\n M internal/sqlgen/compile.go\n M internal/sqlgen/compile_test.go\n M internal/sqlgen/selection.go\n M internal/sqlgen/selection_integration_test.go\n M internal/sqlgen/selection_test.go\n M internal/storage/client.go\n M internal/storage/client_integration_test.go\n M internal/storage/client_test.go\n M internal/storage/retry.go\n M internal/storage/retry_test.go\n M internal/storage/scan.go\n M internal/storage/summary.go\n M testdata/fixtures/README.md\n M testdata/fixtures/compose.yaml\n M testdata/fixtures/init.sql\n M tools/verify-live.py\n?? cmd/adapter/main_test.go\n?? docs/metric-pushdown.md\n?? internal/engine/metrics_pushdown_integration_test.go\n?? internal/engine/metrics_pushdown_test.go\n?? internal/engine/patterns.go\n?? internal/engine/patterns_test.go\n?? internal/engine/streaming_test.go\n?? internal/httpapi/patterns.go\n?? internal/httpapi/patterns_test.go\n?? internal/httpapi/tail.go\n?? internal/httpapi/tail_test.go\n?? internal/limits/config.go\n?? internal/query/parser_drop_test.go\n?? internal/query/pushdown.go\n?? internal/query/pushdown_test.go\n?? internal/sqlgen/prefilter_integration_test.go\n?? internal/sqlgen/prefilter_test.go\n?? internal/sqlgen/service.go\n?? internal/sqlgen/service_integration_test.go\n?? internal/sqlgen/service_test.go\n?? internal/storage/limits.go\n?? internal/storage/limits_test.go\n?? internal/storage/metrics.go\n?? testdata/bench/\n?? tools/bench/\n?? tools/browser-patterns-live.cjs",
+  "adapter_binary_sha256": "bc5435497c69140ff8d0abc59974f6045c8e3688903cd2f0cc56bc3f6b06325b"
+}

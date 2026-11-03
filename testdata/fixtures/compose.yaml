@@ -33,9 +33,12 @@ services:
       CLICKHOUSE_ADDRESS: clickhouse:9000
       CLICKHOUSE_DATABASE: fixture
       CLICKHOUSE_TABLE: otel_logs
+      ADAPTER_SERVICE_NAME_ATTRIBUTES: journald.CONTAINER_NAME,journald._SYSTEMD_UNIT
       CLICKHOUSE_USER: fixture_reader
       CLICKHOUSE_PASSWORD: fixture-reader-not-production
       SOURCE_OFFER_URL: http://127.0.0.1:13101/source
+      # Explore's live tail opens a browser websocket through Grafana's proxy.
+      ADAPTER_ALLOWED_ORIGINS: http://127.0.0.1:13001
     ports:
       - "127.0.0.1:13101:3100"
     depends_on:

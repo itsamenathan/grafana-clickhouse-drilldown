@@ -3,13 +3,12 @@ package httpapi
 
 import (
 	"errors"
+	"fmt"
 	"mime"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
-
-	"grafana-clickhouse-drilldown/internal/engine"
 )
 
 // Timestamp accepts Loki integer nanoseconds, exact decimal seconds and RFC3339.
@@ -43,7 +42,7 @@ func timestamp(value string, fallback int64) (int64, error) {
 }
 
 func duration(value string, fallback time.Duration) (time.Duration, error) {
-	return durationLimit(value, fallback, engine.MaxRange)
+	return durationLimit(value, fallback, 0)
 }
 
 func durationLimit(value string, fallback, maximum time.Duration) (time.Duration, error) {
@@ -57,8 +56,11 @@ func durationLimit(value string, fallback, maximum time.Duration) (time.Duration
 	if err != nil {
 		d, err = time.ParseDuration(value + "s")
 	}
-	if err != nil || d <= 0 || d > maximum {
-		return 0, errors.New("duration must be positive and at most " + maximum.String())
+	if err != nil || d <= 0 {
+		return 0, errors.New("duration must be positive")
+	}
+	if maximum > 0 && d > maximum {
+		return 0, errors.New("duration must be at most " + maximum.String())
 	}
 	return d, nil
 }
@@ -75,8 +77,8 @@ func integer(r *http.Request, name string, fallback, max int) (int, error) {
 	return n, nil
 }
 
-func bounds(r *http.Request) (int64, int64, error) {
-	return boundsLimit(r, engine.MaxRange)
+func (a *queryAPI) bounds(r *http.Request) (int64, int64, error) {
+	return boundsLimit(r, a.limits.MaxQueryRange)
 }
 
 func boundsLimit(r *http.Request, maximum time.Duration) (int64, int64, error) {
@@ -85,12 +87,15 @@ func boundsLimit(r *http.Request, maximum time.Duration) (int64, int64, error) {
 	if err != nil {
 		return 0, 0, err
 	}
-	start, err := timestamp(r.Form.Get("start"), end-int64(time.Hour))
+	start, err := timestamp(r.Form.Get("start"), max(0, end-int64(time.Hour)))
 	if err != nil {
 		return 0, 0, err
 	}
-	if err := engine.RangeLimit(start, end, maximum); err != nil {
-		return 0, 0, err
+	if start < 0 || end < start {
+		return 0, 0, errors.New("time range must be non-negative and ordered")
+	}
+	if maximum > 0 && end-start > int64(maximum) {
+		return 0, 0, fmt.Errorf("time range exceeds configured maximum %s", maximum)
 	}
 	return start, end, nil
 }

@@ -8,6 +8,7 @@ import (
 	"io"
 	"maps"
 	"net/http"
+	"net/http/httptest"
 	"net/url"
 	"reflect"
 	"sort"
@@ -15,6 +16,9 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"grafana-clickhouse-drilldown/internal/limits"
+	"grafana-clickhouse-drilldown/internal/storage"
 )
 
 func TestHTTPContractsAgainstClickHouse(t *testing.T) {
@@ -182,12 +186,33 @@ func TestSQLLogPageStaysWithinResultBudget(t *testing.T) {
 			t.Fatalf("page returned %d records instead of 100", count)
 		}
 	}
-	// A predicate needs the complete bounded scan, not an unsafe pre-filter
-	// SQL limit. The 6 MB fixture must exceed the reader's 4 MiB result budget.
+	// A predicate cannot use an SQL limit. The 6 MB selection exceeds one
+	// 4 MiB reader result, so it must be read in pages, filtered exactly and
+	// stopped once the page is full, from the requested edge.
 	params.Set("query", `{service_name="fixture-bulk"} | missing=""`)
-	status, result := getJSON(t, server.URL+"/loki/api/v1/query_range", params, false)
-	if status < 400 || result["status"] != "error" {
-		t.Fatal("filtered over-budget selection returned partial success")
+	for _, direction := range []string{"forward", "backward"} {
+		params.Set("direction", direction)
+		status, result := getJSON(t, server.URL+"/loki/api/v1/query_range", params, false)
+		if status != 200 {
+			t.Fatalf("paged filtered %s scan failed: %d %v", direction, status, result)
+		}
+		values := result["data"].(map[string]any)["result"].([]any)[0].(map[string]any)["values"].([]any)
+		first, _ := strconv.ParseInt(values[0].([]any)[0].(string), 10, 64)
+		if len(values) != 100 || direction == "forward" && first != base || direction == "backward" && first != base+999 {
+			t.Fatalf("filtered %s page has %d records starting at %d", direction, len(values), first-base)
+		}
+	}
+	// Counting every record of the 6 MB selection through a filter is exact.
+	metric := url.Values{"query": {`sum(count_over_time({service_name="fixture-bulk"} | missing="" [1s]))`}, "time": {strconv.FormatInt(base+int64(time.Second)-int64(time.Millisecond), 10)}}
+	status, result := getJSON(t, server.URL+"/loki/api/v1/query", metric, false)
+	if status != 200 || result["data"].(map[string]any)["result"].([]any)[0].(map[string]any)["value"].([]any)[1] != "1000" {
+		t.Fatalf("paged metric lost records: %d %v", status, result)
+	}
+	params.Del("direction")
+	params.Set("query", `{service_name="fixture-bulk"} | missing=""`)
+	status, result = getJSON(t, server.URL+"/loki/api/v1/index/volume", params, false)
+	if status != 200 || result["data"].(map[string]any)["result"].([]any)[0].(map[string]any)["value"].([]any)[1] != "6000000" {
+		t.Fatalf("filtered volume did not cover every record: %d %v", status, result)
 	}
 	// Overview summaries must not transfer the six megabytes of source rows.
 	params.Del("direction")
@@ -213,9 +238,144 @@ func TestSQLLogPageStaysWithinResultBudget(t *testing.T) {
 			}
 		}
 	}
-	params.Set("query", `{service_name="fixture-bulk"} | missing=""`)
+	params.Set("query", `{service_name="fixture-bulk"} | missing="x"`)
 	status, result = getJSON(t, server.URL+"/loki/api/v1/index/volume", params, false)
-	if status < 400 || result["status"] != "error" {
-		t.Fatal("summary optimization bypassed a residual filter")
+	if status != 200 || len(result["data"].(map[string]any)["result"].([]any)) != 0 {
+		t.Fatalf("summary optimization bypassed a residual filter: %v", result)
+	}
+}
+
+func TestUnsplittableTimestampFailsExplicitly(t *testing.T) {
+	_, server := fixtureServerTable(t, "otel_logs_tie")
+	base := int64(1767225600000000000)
+	params := url.Values{"start": {strconv.FormatInt(base, 10)}, "end": {strconv.FormatInt(base+1, 10)}, "query": {`{service_name="fixture-tie"} |= "tie"`}}
+	status, result := getJSON(t, server.URL+"/loki/api/v1/query_range", params, false)
+	if status < 400 || result["status"] != "error" || !strings.Contains(result["error"].(string), "narrow") {
+		t.Fatalf("over-budget single timestamp returned %d %v", status, result)
+	}
+}
+
+func TestPatternsAgainstClickHouse(t *testing.T) {
+	_, server := fixtureServerTable(t, "otel_logs_patterns")
+	base := int64(1767225600000000000)
+	params := url.Values{"start": {strconv.FormatInt(base, 10)}, "end": {strconv.FormatInt(base+int64(2*time.Minute), 10)}, "query": {`{service_name="fixture-patterns"}`}, "step": {"30s"}}
+	status, result := getJSON(t, server.URL+"/loki/api/v1/patterns", params, false)
+	if status != 200 {
+		t.Fatalf("patterns failed: %d %v", status, result)
+	}
+	totals := map[string]int64{}
+	levels := map[string]string{}
+	for _, raw := range result["data"].([]any) {
+		series := raw.(map[string]any)
+		pattern := series["pattern"].(string)
+		levels[pattern] = series["level"].(string)
+		for _, sample := range series["samples"].([]any) {
+			point := sample.([]any)
+			ts, _ := point[0].(json.Number).Int64()
+			value, _ := point[1].(json.Number).Int64()
+			if ts%30 != 0 || ts < base/1e9 || ts >= base/1e9+120 {
+				t.Fatalf("sample timestamp outside the stepped range: %d", ts)
+			}
+			totals[pattern] += value
+		}
+	}
+	want := map[string]int64{"order <_> shipped to warehouse <_>": 40, "payment <_> declined for card <_>": 40}
+	wantLevels := map[string]string{"order <_> shipped to warehouse <_>": "info", "payment <_> declined for card <_>": "error"}
+	if !reflect.DeepEqual(totals, want) || !reflect.DeepEqual(levels, wantLevels) {
+		t.Fatalf("patterns %v levels %v", totals, levels)
+	}
+	// Drilldown filters by a pattern with |> and excludes it with !>.
+	logs := url.Values{"start": params["start"], "end": params["end"], "limit": {"1000"}}
+	for pattern, count := range want {
+		logs.Set("query", `{service_name="fixture-patterns"} |> "`+pattern+`"`)
+		if got := len(canonical(t, mustJSON(t, server.URL+"/loki/api/v1/query_range", logs))); int64(got) != count {
+			t.Fatalf("pattern filter %q selected %d lines, want %d", pattern, got, count)
+		}
+		logs.Set("query", `{service_name="fixture-patterns"} !> "`+pattern+`"`)
+		if got := len(canonical(t, mustJSON(t, server.URL+"/loki/api/v1/query_range", logs))); int64(got) != 120-count {
+			t.Fatalf("pattern exclusion %q kept %d lines", pattern, got)
+		}
+	}
+	params.Set("query", `{service_name="fixture-patterns"} | json`)
+	if status, _ := getJSON(t, server.URL+"/loki/api/v1/patterns", params, false); status != http.StatusBadRequest {
+		t.Fatal("pattern pipeline was accepted")
+	}
+}
+
+func mustJSON(t *testing.T, target string, params url.Values) map[string]any {
+	t.Helper()
+	status, result := getJSON(t, target, params, false)
+	if status != 200 {
+		t.Fatalf("%s: %d %v", target, status, result)
+	}
+	return result
+}
+
+func TestWideRangesAgainstClickHouse(t *testing.T) {
+	_, server := fixtureServer(t)
+	base := int64(1767225600000000000)
+	params := url.Values{"query": {`{service_name="fixture-api"}`}, "start": {strconv.FormatInt(base-int64(7*24*time.Hour), 10)}, "end": {strconv.FormatInt(base+int64(7*24*time.Hour), 10)}}
+	for _, endpoint := range []string{"query_range", "labels", "detected_labels", "detected_fields", "series", "index/volume", "index/stats"} {
+		status, result := getJSON(t, server.URL+"/loki/api/v1/"+endpoint, params, false)
+		if status != 200 {
+			t.Fatalf("wide %s: %d %v", endpoint, status, result)
+		}
+	}
+	params.Set("query", `sum(count_over_time({service_name="fixture-api"}[2h]))`)
+	params.Set("step", "1h")
+	// Exact event timestamps below one millisecond remain in the first window.
+	status, result := getJSON(t, server.URL+"/loki/api/v1/query_range", params, false)
+	if status != 200 {
+		t.Fatalf("wide metric/window: %d %v", status, result)
+	}
+}
+
+func TestHTTPScanBudgetFailsExplicitlyAgainstClickHouse(t *testing.T) {
+	for name, costs := range map[string]storage.Limits{"rows": {MaxScanRows: 1}, "bytes": {MaxScanBytes: 1}} {
+		t.Run(name, func(t *testing.T) {
+			db, err := storage.Open(storage.Config{ServiceNameAttributes: "journald.CONTAINER_NAME,journald._SYSTEMD_UNIT", Address: "127.0.0.1:19000", Database: "fixture", Table: "otel_logs", User: "fixture_reader", Password: "fixture-reader-not-production", Limits: costs})
+			if err != nil {
+				t.Fatal(err)
+			}
+			t.Cleanup(func() { db.Close() })
+			server := httptest.NewServer(New(db, "integration-test"))
+			t.Cleanup(server.Close)
+			base := int64(1767225600000000000)
+			params := url.Values{"query": {`{service_name="fixture-api"} | json | missing=""`}, "start": {strconv.FormatInt(base-1, 10)}, "end": {strconv.FormatInt(base+100, 10)}}
+			status, result := getJSON(t, server.URL+"/loki/api/v1/query_range", params, false)
+			if status < 400 || result["status"] != "error" || result["data"] != nil || !strings.Contains(result["error"].(string), "scan budget") {
+				t.Fatalf("cost bound returned successful partial output: %d %v", status, result)
+			}
+		})
+	}
+}
+
+func TestRecentPatternCoverageAgainstClickHouse(t *testing.T) {
+	db, _ := fixtureServerTable(t, "otel_logs_patterns")
+	server := httptest.NewServer(New(db, "integration-test", Options{Limits: limits.Config{PatternLines: 90}}))
+	t.Cleanup(server.Close)
+	base := int64(1767225600000000000)
+	params := url.Values{"query": {`{service_name="fixture-patterns"}`}, "start": {strconv.FormatInt(base-int64(24*time.Hour), 10)}, "end": {strconv.FormatInt(base+int64(2*time.Minute), 10)}, "step": {"30s"}}
+	response, err := http.Get(server.URL + "/loki/api/v1/patterns?" + params.Encode())
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer response.Body.Close()
+	var result struct {
+		Data []struct {
+			Samples [][2]int64 `json:"samples"`
+		} `json:"data"`
+	}
+	if err := json.NewDecoder(response.Body).Decode(&result); err != nil {
+		t.Fatal(err)
+	}
+	total := int64(0)
+	for _, pattern := range result.Data {
+		for _, sample := range pattern.Samples {
+			total += sample[1]
+		}
+	}
+	if response.StatusCode != 200 || response.Header.Get("X-Patterns-Sampled") != "true" || response.Header.Get("X-Patterns-Covered-Start") != strconv.FormatInt(base+int64(30*time.Second), 10) || response.Header.Get("X-Patterns-Lines") != "90" || total != 60 {
+		t.Fatalf("incorrect recent training: %d %v total=%d", response.StatusCode, response.Header, total)
 	}
 }

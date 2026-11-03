@@ -7,6 +7,7 @@ import "grafana-clickhouse-drilldown/internal/query"
 // indexed-label and safe line-filter selection. The exact Loki implementations
 // handle JSON/logfmt, error labels and field predicates as bounded residuals.
 // They are not approximated with ClickHouse's different JSON/logfmt semantics.
+// SQL-complete metric plans may aggregate without invoking the residual.
 type Compiled struct {
 	Predicate Predicate
 	Residual  *query.Evaluator

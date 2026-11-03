@@ -104,8 +104,8 @@ def main():
         tests.append(result)
         print(json.dumps(result))
 
-    def logs(query, limit=2000):
-        result = loki('query_range', query=query, start=str(start), end=str(end), limit=limit, direction='backward')
+    def logs(query, limit=2000, since=None):
+        result = loki('query_range', query=query, start=str(since or start), end=str(end), limit=limit, direction='backward')
         streams = result.get('data', {}).get('result', [])
         return result, [(stream.get('stream', {}), value) for stream in streams for value in stream.get('values', [])]
 
@@ -190,13 +190,58 @@ def main():
         actual = {int(Decimal(p[0]) * 10**9): int(p[1]) for series in result['data']['result'] for p in series['values']}
         return actual == expected, {'evaluation_points': len(actual), 'exact_sliding_windows': actual == expected}
 
+    hour_start = end - 3600 * 10**9
+    hour_filter = f'Timestamp >= fromUnixTimestamp64Nano({hour_start}) AND Timestamp < fromUnixTimestamp64Nano({end})'
+    busiest = sql(f'SELECT {SERVICE} AS service, count() AS n FROM default.otel_logs WHERE {hour_filter} GROUP BY service ORDER BY n DESC LIMIT 1')[0]
+    busiest_selector = '{service_name=' + json.dumps(busiest['service']) + '}'
+
+    def paged_filtered_count():
+        # A label filter needs every record's attribute maps. The busiest
+        # service's hour exceeds one reader result, so this must page.
+        query = 'sum(count_over_time(' + busiest_selector + ' | json | logfmt | drop __error__, __error_details__ | detected_level=~".+" [1h]))'
+        at = end - 10**6  # Metric timestamps are millisecond-aligned.
+        result = loki('query', query=query, time=str(at))
+        actual = int(result['data']['result'][0]['value'][1]) if result['data']['result'] else 0
+        expected = int(sql(f"SELECT count() AS n FROM default.otel_logs WHERE Timestamp > fromUnixTimestamp64Nano({at - 3600 * 10**9}) AND Timestamp <= fromUnixTimestamp64Nano({at}) AND {SERVICE} = unhex('{busiest['service'].encode().hex()}')")[0]['n'])
+        return actual == expected, {'expected_records': expected, 'counted_records': actual}
+
     def patterns():
         config = loki('drilldown-limits')
-        try:
-            loki('patterns', query=selector, start=str(start), end=str(end))
-        except HTTPError as error:
-            return config.get('pattern_ingester_enabled') is False and error.code == 501, {'advertised_disabled': config.get('pattern_ingester_enabled') is False, 'explicit_unsupported_status': error.code}
-        return False, {'error': 'unsupported pattern discovery unexpectedly succeeded'}
+        result = loki('patterns', query=busiest_selector, start=str(hour_start), end=str(end), step='60s')
+        series = result.get('data', [])
+        totals = [sum(int(v) for _, v in p['samples']) for p in series]
+        aligned = all(int(ts) % 60 == 0 and hour_start // 10**9 - 60 <= int(ts) < end // 10**9 for p in series for ts, _ in p['samples'])
+        records = int(busiest['n'])
+        detail = {'advertised_enabled': config.get('pattern_ingester_enabled') is True, 'patterns': len(series), 'records': records, 'pattern_samples': sum(totals), 'unix_second_steps': aligned}
+        if not series:
+            return False, detail
+        _, rows = logs(busiest_selector + ' |> ' + json.dumps(series[0]['pattern']), since=hour_start)
+        detail['top_pattern_filtered_rows'] = len(rows)
+        ok = (detail['advertised_enabled'] and aligned and all(t >= 30 for t in totals) and sum(totals) <= records
+              and bool(rows) and all(labels.get('service_name') == busiest['service'] for labels, _ in rows))
+        return ok, detail
+
+    def heavy_page():
+        # Drilldown asks for maxLines (2,000) per page. Use the service with
+        # the most attribute data per line over a day, so the page is large;
+        # it must arrive whole, matching SQL, not hit a response-size cap.
+        day_start = end - 86400 * 10**9
+        day_filter = f'Timestamp >= fromUnixTimestamp64Nano({day_start}) AND Timestamp < fromUnixTimestamp64Nano({end})'
+        heavy = sql(f'SELECT {SERVICE} AS service, count() AS n, avg(length(toJSONString(LogAttributes)) + length(toJSONString(ResourceAttributes))) AS attrs FROM default.otel_logs WHERE {day_filter} GROUP BY service HAVING n >= 2000 AND service != \'\' ORDER BY attrs DESC LIMIT 1')
+        if not heavy:
+            return False, {'error': 'No service with 2,000 records in the last day'}
+        name = heavy[0]['service']
+        query = '{service_name=' + json.dumps(name) + '} | json | logfmt | drop __error__, __error_details__'
+        target = base + '/api/datasources/proxy/uid/' + UID + '/loki/api/v1/query_range?' + urlencode({'query': query, 'start': day_start, 'end': end, 'limit': 2000, 'direction': 'backward'})
+        with urlopen(Request(target, headers={**headers, 'X-Loki-Response-Encoding-Flags': 'categorize-labels'}), timeout=60) as response:
+            body = response.read()
+        result = json.loads(body)
+        rows = [(stream['stream'], value) for stream in result['data']['result'] for value in stream['values']]
+        newest = sql(f"SELECT toString(toUnixTimestamp64Nano(Timestamp)) AS ns FROM default.otel_logs WHERE {day_filter} AND {SERVICE} = unhex('{name.encode().hex()}') ORDER BY Timestamp DESC LIMIT 2000")
+        expected = sorted(row['ns'] for row in newest)
+        actual = sorted(value[0] for _, value in rows)
+        correct = actual == expected and all(labels.get('service_name') == name for labels, _ in rows)
+        return correct and len(rows) == 2000, {'rows': len(rows), 'response_bytes': len(body), 'matches_sql_newest_2000': correct}
 
     check('canonical service list and exact byte volumes', volume)
     check('log retrieval, service identity and nanosecond bounds', service_logs)
@@ -209,7 +254,9 @@ def main():
     check('structured fields visible with parsers disabled', fields)
     check('structured field filtering with positive and absent controls', field_filter)
     check('every metric evaluation window versus direct SQL', windows)
-    check('optional patterns coherently disabled, never fake success', patterns)
+    check('paged filtered count of the busiest hour versus SQL', paged_filtered_count)
+    check('patterns: Loki pruning, Unix-second steps and pattern filtering', patterns)
+    check('full 2,000-line page of the most attribute-heavy service over a day', heavy_page)
     defaults = [d['uid'] for d in api('/api/datasources') if d.get('isDefault')]
     print(json.dumps({'passed': sum(t['pass'] for t in tests), 'total': len(tests), 'default_data_sources': defaults}))
     return 0 if all(t['pass'] for t in tests) and defaults == ['clickstack'] else 1

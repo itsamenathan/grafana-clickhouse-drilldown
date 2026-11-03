@@ -1,0 +1,7 @@
+.data/
+results/adapter-*
+results/bench
+results/bench-*
+results/*.log
+results/*.adapter
+__pycache__/

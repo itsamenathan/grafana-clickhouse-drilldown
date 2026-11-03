@@ -2,6 +2,7 @@
 package sqlgen
 
 import (
+	"encoding/hex"
 	"regexp"
 	"strings"
 	"testing"
@@ -24,10 +25,10 @@ func TestParametersNeverEnterSQL(t *testing.T) {
 			t.Fatalf("filter value leaked into SQL: %s", predicate.SQL)
 		}
 	}
-	if len(predicate.Parameters) != 5 || strings.Count(predicate.SQL, "{filter_") != 5 {
+	if len(predicate.Parameters) != 3 || strings.Count(predicate.SQL, "{filter_") != 3 {
 		t.Fatalf("lost parameter: %+v", predicate)
 	}
-	if predicate.Parameters["filter_0"] != "'; DROP TABLE default.otel_logs; --" {
+	if decodeParameter(t, predicate.Parameters["filter_0"]) != "'; DROP TABLE default.otel_logs; --" {
 		t.Fatal("parameter changed")
 	}
 	if !strings.Contains(predicate.SQL, ServiceExpression) || !strings.Contains(predicate.SQL, "NOT (") {
@@ -53,10 +54,17 @@ func TestRegexTranslation(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			p := Predicate{Parameters: map[string]string{}}
-			if _, err := p.condition("Body", query.Regex, tc.pattern, tc.label); err != nil {
+			condition, err := p.condition("Body", query.Regex, tc.pattern, tc.label)
+			if err != nil {
 				t.Fatal(err)
 			}
-			re := regexp.MustCompile(p.Parameters["filter_0"])
+			if !tc.label {
+				if condition != "" || len(p.Parameters) != 0 {
+					t.Fatal("line regex must be residual-only")
+				}
+				return
+			}
+			re := regexp.MustCompile(decodeParameter(t, p.Parameters["filter_0"]))
 			if got := re.MatchString(tc.value); got != tc.want {
 				t.Fatalf("match %q against %q = %v, want %v", re, tc.value, got, tc.want)
 			}
@@ -84,11 +92,24 @@ func TestAllMatcherOperatorsAndEmptyValues(t *testing.T) {
 			Matchers: []query.Matcher{{Name: "service_name", Op: query.Equal, Value: "api"}, {Name: "detected_level", Op: op, Value: ""}},
 			Filters:  []query.LineFilter{{Op: op, Value: ""}},
 		})
-		if err != nil || len(p.Parameters) != 3 {
+		wantParameters := 3
+		if op == query.Regex || op == query.NotRegex {
+			wantParameters = 2
+		}
+		if err != nil || len(p.Parameters) != wantParameters {
 			t.Fatalf("operator %d: %+v, %v", op, p, err)
 		}
 		if !strings.Contains(p.SQL, LevelExpression) {
 			t.Fatal("level filter did not use canonical mapping")
 		}
 	}
+}
+
+func decodeParameter(t *testing.T, value string) string {
+	t.Helper()
+	decoded, err := hex.DecodeString(value)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return string(decoded)
 }

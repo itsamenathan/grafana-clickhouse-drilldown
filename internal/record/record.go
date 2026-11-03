@@ -13,6 +13,22 @@ type ServiceSummary struct {
 	Bytes   uint64
 }
 
+// ErrStop ends a scan early from its visitor. The scan then reports success:
+// callers use it only after they hold a complete answer, never to truncate.
+var ErrStop = errors.New("scan stopped by its consumer")
+
+// ScanOptions select record order and columns. Metadata transfers attribute
+// maps and trace identifiers; without it, records carry only the timestamp,
+// body and SQL-computed service/level. Limit is a SQL row limit and is valid
+// only for selections whose residual pipeline preserves every row.
+type ScanOptions struct {
+	Backward bool
+	Metadata bool
+	Limit    int
+	// EdgeWindows plans from the requested edge, for consumers that stop early.
+	EdgeWindows bool
+}
+
 type Raw struct {
 	Timestamp                         int64
 	Body, Service, Level              string
@@ -101,4 +117,13 @@ func (r Raw) Metadata() map[string]string {
 		m["span_id"] = r.SpanID
 	}
 	return m
+}
+
+// MetricBucket covers (Timestamp-step,Timestamp], including exact nanosecond
+// edge semantics. Only explicitly requested SQL grouping labels are populated.
+type MetricBucket struct {
+	Timestamp      int64
+	Service, Level string
+	Entries, Bytes uint64
+	ParserGuard    uint64
 }

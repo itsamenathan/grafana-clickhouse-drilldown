@@ -1,0 +1,5707 @@
+{
+  "started": "2026-10-27T15:49:03.020131434Z",
+  "finished": "2026-10-27T16:12:13.628830549Z",
+  "reader": "bench_reader_wide",
+  "target": "http://127.0.0.1:29100",
+  "adapter_binary_sha256": "8298bdc515bf9ef730956496e11fa482b72969717d448e52b914e1a5b300788e",
+  "git_head": "bf1068b0b0e553400150d34601f09f945273fa77",
+  "git_diff_stat_start": "AGENTS.md                                         |  53 ++--\n README.md                                         |  61 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  89 +++++-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 184 +++++++----\n docs/operations.md                                | 235 +++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 291 ++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     | 106 +++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  75 ++++-\n internal/record/record.go                         |  24 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 135 +++++++-\n internal/sqlgen/selection_integration_test.go     |   4 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  22 +-\n internal/storage/client_integration_test.go       | 105 ++++++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 370 ++++++++++++++++++----\n internal/storage/summary.go                       |  18 +-\n testdata/fixtures/README.md                       |  16 +\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 41 files changed, 2122 insertions(+), 554 deletions(-)",
+  "git_diff_stat_end": "AGENTS.md                                         |  53 ++--\n README.md                                         |  61 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  89 +++++-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 184 +++++++----\n docs/operations.md                                | 235 +++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 291 ++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     | 106 +++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  75 ++++-\n internal/record/record.go                         |  24 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 135 +++++++-\n internal/sqlgen/selection_integration_test.go     |   4 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  22 +-\n internal/storage/client_integration_test.go       | 105 ++++++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 370 ++++++++++++++++++----\n internal/storage/summary.go                       |  18 +-\n testdata/fixtures/README.md                       |  16 +\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 41 files changed, 2122 insertions(+), 554 deletions(-)",
+  "build_diff_stat": " AGENTS.md                                         |  53 ++--\n README.md                                         |  61 ++--\n THIRD_PARTY.md                                    |   8 +\n cmd/adapter/main.go                               |  89 +++++-\n deploy/compose.yaml                               |   2 +\n docs/compatibility.md                             | 184 +++++++----\n docs/operations.md                                | 235 +++++++++-----\n docs/security.md                                  |  15 +-\n go.mod                                            |   4 +-\n go.sum                                            |   4 +\n internal/engine/engine.go                         | 205 +++++++-----\n internal/engine/results.go                        | 291 ++++++++++++++---\n internal/engine/results_test.go                   |   4 +-\n internal/httpapi/contracts_integration_test.go    | 176 +++++++++-\n internal/httpapi/differential_integration_test.go |   6 +-\n internal/httpapi/discovery.go                     | 106 +++++--\n internal/httpapi/limits_test.go                   | 144 ++++++++-\n internal/httpapi/params.go                        |  25 +-\n internal/httpapi/query.go                         |  58 ++--\n internal/httpapi/server.go                        |  25 +-\n internal/httpapi/server_test.go                   |   2 +-\n internal/httpapi/volume.go                        |  86 +++--\n internal/query/evaluator.go                       |   5 +-\n internal/query/evaluator_test.go                  |  11 +-\n internal/query/query.go                           |  75 ++++-\n internal/record/record.go                         |  24 ++\n internal/sqlgen/compile.go                        |   1 +\n internal/sqlgen/compile_test.go                   |   6 +\n internal/sqlgen/selection.go                      | 135 +++++++-\n internal/sqlgen/selection_integration_test.go     |   4 +\n internal/sqlgen/selection_test.go                 |  14 +-\n internal/storage/client.go                        |  22 +-\n internal/storage/client_integration_test.go       | 105 ++++++\n internal/storage/retry.go                         |   5 +-\n internal/storage/retry_test.go                    |  20 ++\n internal/storage/scan.go                          | 370 ++++++++++++++++++----\n internal/storage/summary.go                       |  18 +-\n testdata/fixtures/README.md                       |  16 +\n testdata/fixtures/compose.yaml                    |   2 +\n testdata/fixtures/init.sql                        |  20 ++\n tools/verify-live.py                              |  40 ++-\n 41 files changed, 2122 insertions(+), 554 deletions(-)\n",
+  "dataset": {
+    "rows": 100000064,
+    "bytes_on_disk": 13952447887,
+    "uncompressed_bytes": 83334420403,
+    "parts": 182,
+    "requested_rows": 100000000,
+    "selected_rows": 100000000,
+    "scale": 1.0,
+    "days": 7,
+    "end": "2026-10-27T15:20:00+00:00",
+    "start": "2026-10-20T15:20:00+00:00",
+    "generation_seconds": 969.216,
+    "free_disk_before": 82591268864,
+    "available_ram_before": 10517307392,
+    "estimated_bytes_per_row": 139.788206,
+    "max_gib": 18.0,
+    "services": [
+      {
+        "service": "edge-gateway",
+        "rows": 59993476
+      },
+      {
+        "service": "checkout",
+        "rows": 15004356
+      },
+      {
+        "service": "payments",
+        "rows": 8999479
+      },
+      {
+        "service": "search",
+        "rows": 6004305
+      },
+      {
+        "service": "catalog",
+        "rows": 4000517
+      },
+      {
+        "service": "orders",
+        "rows": 2501332
+      },
+      {
+        "service": "inventory",
+        "rows": 1499181
+      },
+      {
+        "service": "auth",
+        "rows": 999747
+      },
+      {
+        "service": "notifications",
+        "rows": 498368
+      },
+      {
+        "service": "shipping",
+        "rows": 200324
+      },
+      {
+        "service": "billing",
+        "rows": 99788
+      },
+      {
+        "service": "recommendations",
+        "rows": 60000
+      },
+      {
+        "service": "audit",
+        "rows": 39984
+      },
+      {
+        "service": "scheduler",
+        "rows": 29531
+      },
+      {
+        "service": "backup",
+        "rows": 19811
+      },
+      {
+        "service": "cert-renewer",
+        "rows": 15037
+      },
+      {
+        "service": "dns-sync",
+        "rows": 11961
+      },
+      {
+        "service": "quota-cleaner",
+        "rows": 9955
+      },
+      {
+        "service": "report-exporter",
+        "rows": 7909
+      },
+      {
+        "service": "archive-sweeper",
+        "rows": 4939
+      }
+    ],
+    "total_generation_seconds": 1156.601,
+    "sql_sha256": "4632c32b1ab900e96925a73001818b42386886123abae61098d86837baf2045a",
+    "live_rows": 64
+  },
+  "notes": [
+    "Synthetic local data only. One request at a time. No production credentials or data.",
+    "A host-launched adapter has no production cgroup CPU or memory cap. The bench ClickHouse service is capped at two CPUs and 3 GiB.",
+    "Adapter peak is the process-lifetime high-water mark after each request, not a per-request allocation measurement. Zero means unavailable.",
+    "ClickHouse stats sum terminal QueryFinish/Exception rows for this reader within server-clock boundaries; query memory is the maximum across those rows. No QueryStart double counting.",
+    "The benchmark must be the only client using the selected bench reader. Readiness is outside query measurement intervals.",
+    "No cache flushing: results reflect normal warm/cold and background merge effects in matrix order. HTTP status and empty result counts are preserved without assuming success means correctness."
+  ],
+  "results": [
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2011.71,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 36581376,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3472051,
+        "read_bytes": 330039515,
+        "peak_query_memory_bytes": 7248826,
+        "sum_query_duration_ms": 2010
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 908.22,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 42749952,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 60
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2165.876,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 34747
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 43253760,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3477512,
+        "read_bytes": 336896115,
+        "peak_query_memory_bytes": 10602810,
+        "sum_query_duration_ms": 2161
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 9699.681,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 62099456,
+      "clickhouse": {
+        "queries": 58,
+        "read_rows": 44013539,
+        "read_bytes": 794382320,
+        "peak_query_memory_bytes": 13755276,
+        "sum_query_duration_ms": 7610
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 92.689,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 62099456,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 49
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 165.646,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 62099456,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 87
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.995,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 62099456,
+      "clickhouse": {
+        "queries": 110,
+        "read_rows": 80193931,
+        "read_bytes": 3013615968,
+        "peak_query_memory_bytes": 24069593,
+        "sum_query_duration_ms": 14896
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 813.352,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 93,
+        "items": 31,
+        "bytes": 9020
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74219520,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 349021,
+        "read_bytes": 46158648,
+        "peak_query_memory_bytes": 9283220,
+        "sum_query_duration_ms": 556
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.478,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 150,
+        "read_rows": 68988092,
+        "read_bytes": 3259718172,
+        "peak_query_memory_bytes": 24045268,
+        "sum_query_duration_ms": 14917
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1767.516,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3472051,
+        "read_bytes": 136692168,
+        "peak_query_memory_bytes": 5304915,
+        "sum_query_duration_ms": 1765
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 79.701,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10302926,
+        "sum_query_duration_ms": 57
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1982.303,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 33414
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3477512,
+        "read_bytes": 139237394,
+        "peak_query_memory_bytes": 9901730,
+        "sum_query_duration_ms": 1978
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 10142.916,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 58,
+        "read_rows": 44926927,
+        "read_bytes": 631637890,
+        "peak_query_memory_bytes": 13748566,
+        "sum_query_duration_ms": 8123
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 108.127,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22699043,
+        "peak_query_memory_bytes": 5702887,
+        "sum_query_duration_ms": 84
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 206.89,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22853442,
+        "peak_query_memory_bytes": 14102363,
+        "sum_query_duration_ms": 116
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1221.325,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3337
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 651143,
+        "read_bytes": 386897807,
+        "peak_query_memory_bytes": 24518342,
+        "sum_query_duration_ms": 1136
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 910.148,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 269,
+        "items": 27,
+        "bytes": 10827
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 25,
+        "read_rows": 446988,
+        "read_bytes": 56529870,
+        "peak_query_memory_bytes": 10929913,
+        "sum_query_duration_ms": 668
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 14448.874,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 106,
+        "read_rows": 75899275,
+        "read_bytes": 1624742972,
+        "peak_query_memory_bytes": 25837954,
+        "sum_query_duration_ms": 12711
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1724.717,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3472051,
+        "read_bytes": 69586509,
+        "peak_query_memory_bytes": 5299547,
+        "sum_query_duration_ms": 1723
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 663.349,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 1088478,
+        "read_bytes": 136658897,
+        "peak_query_memory_bytes": 20890141,
+        "sum_query_duration_ms": 624
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1726.615,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 151,
+        "items": 0,
+        "bytes": 2824
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3477512,
+        "read_bytes": 70971584,
+        "peak_query_memory_bytes": 9685456,
+        "sum_query_duration_ms": 1724
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 3583.681,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 137,
+        "items": 0,
+        "bytes": 2417
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 6949563,
+        "read_bytes": 141638125,
+        "peak_query_memory_bytes": 10822205,
+        "sum_query_duration_ms": 3580
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 237.528,
+      "result": {
+        "rows": 21,
+        "series": 21,
+        "samples": 0,
+        "items": 0,
+        "bytes": 28658
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 14,
+        "read_rows": 118594,
+        "read_bytes": 67981701,
+        "peak_query_memory_bytes": 10493162,
+        "sum_query_duration_ms": 222
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 487.757,
+      "result": {
+        "rows": 15,
+        "series": 15,
+        "samples": 0,
+        "items": 0,
+        "bytes": 23331
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 203056,
+        "read_bytes": 78902690,
+        "peak_query_memory_bytes": 19249054,
+        "sum_query_duration_ms": 459
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1861.214,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3312
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 3538084,
+        "read_bytes": 114705532,
+        "peak_query_memory_bytes": 18557413,
+        "sum_query_duration_ms": 1845
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 273.159,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 203056,
+        "read_bytes": 18051894,
+        "peak_query_memory_bytes": 5589377,
+        "sum_query_duration_ms": 257
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 291.532,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 66,
+        "items": 0,
+        "bytes": 1585
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 163780,
+        "read_bytes": 62093276,
+        "peak_query_memory_bytes": 20763679,
+        "sum_query_duration_ms": 285
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "15m",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2171.178,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 82
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3472051,
+        "read_bytes": 496903229,
+        "peak_query_memory_bytes": 5270883,
+        "sum_query_duration_ms": 2170
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 188.338,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144777
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 65161099,
+        "peak_query_memory_bytes": 23197330,
+        "sum_query_duration_ms": 167
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2485.76,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1804,
+        "items": 0,
+        "bytes": 34984
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3477512,
+        "read_bytes": 514065685,
+        "peak_query_memory_bytes": 9947639,
+        "sum_query_duration_ms": 2482
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [2s]))",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.422,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 120,
+        "read_rows": 88887615,
+        "read_bytes": 2735223870,
+        "peak_query_memory_bytes": 9938691,
+        "sum_query_duration_ms": 14952
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 224.189,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135587
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62276376,
+        "peak_query_memory_bytes": 14630741,
+        "sum_query_duration_ms": 202
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 369.318,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155227
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 94385162,
+        "peak_query_memory_bytes": 24302052,
+        "sum_query_duration_ms": 299
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "15m",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.484,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 74326016,
+      "clickhouse": {
+        "queries": 49,
+        "read_rows": 36912685,
+        "read_bytes": 5280907278,
+        "peak_query_memory_bytes": 24359199,
+        "sum_query_duration_ms": 14991,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "15m",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "retained_bytes",
+      "error": "selected result exceeds the bounded memory budget; narrow the selection",
+      "latency_ms": 6596.215,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 124
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 1297207,
+        "read_bytes": 173119720,
+        "peak_query_memory_bytes": 10469463,
+        "sum_query_duration_ms": 1126
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "15m",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [2s]) by ()",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.372,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 51,
+        "read_rows": 9286120,
+        "read_bytes": 5414205215,
+        "peak_query_memory_bytes": 24181197,
+        "sum_query_duration_ms": 14952
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "15m",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "2s",
+      "start": "2026-10-27T15:05:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2119.908,
+      "result": {
+        "rows": 0,
+        "series": 20,
+        "samples": 20,
+        "items": 0,
+        "bytes": 1479
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 3002267,
+        "read_bytes": 493144957,
+        "peak_query_memory_bytes": 5267947,
+        "sum_query_duration_ms": 2118
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9232.294,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 1258471994,
+        "peak_query_memory_bytes": 9507356,
+        "sum_query_duration_ms": 9231
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 97.075,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 67
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9020.211,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 28770
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12001696,
+        "read_bytes": 1273371731,
+        "peak_query_memory_bytes": 10725047,
+        "sum_query_duration_ms": 9016
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.072,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 69,
+        "read_rows": 45582876,
+        "read_bytes": 1827786803,
+        "peak_query_memory_bytes": 12087306,
+        "sum_query_duration_ms": 14971
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 108.931,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 88
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 167.182,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 97
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.335,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 11,
+        "read_rows": 11829112,
+        "read_bytes": 5763784358,
+        "peak_query_memory_bytes": 26867824,
+        "sum_query_duration_ms": 15077,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 708.905,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 93,
+        "items": 31,
+        "bytes": 9020
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 349021,
+        "read_bytes": 46158648,
+        "peak_query_memory_bytes": 9283220,
+        "sum_query_duration_ms": 454
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.144,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 36,
+        "read_rows": 8261158,
+        "read_bytes": 6120004685,
+        "peak_query_memory_bytes": 26876072,
+        "sum_query_duration_ms": 15008
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6786.854,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 437627907,
+        "peak_query_memory_bytes": 9553744,
+        "sum_query_duration_ms": 6785
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 68.625,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10467710,
+        "sum_query_duration_ms": 47
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6787.297,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 28048
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12001696,
+        "read_bytes": 441716050,
+        "peak_query_memory_bytes": 10981696,
+        "sum_query_duration_ms": 6783
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "scan_rows",
+      "error": "selected log data exceeds the bounded scan budget; narrow the time range or selector",
+      "latency_ms": 14295.931,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 137
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 59,
+        "read_rows": 40528170,
+        "read_bytes": 827619934,
+        "peak_query_memory_bytes": 13660384,
+        "sum_query_duration_ms": 12345
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 98.36,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22699043,
+        "peak_query_memory_bytes": 5702887,
+        "sum_query_duration_ms": 77
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 197.513,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22853442,
+        "peak_query_memory_bytes": 14102363,
+        "sum_query_duration_ms": 118
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.014,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 101,
+        "read_rows": 51096865,
+        "read_bytes": 2767818461,
+        "peak_query_memory_bytes": 27327477,
+        "sum_query_duration_ms": 14976,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 896.909,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 269,
+        "items": 27,
+        "bytes": 10827
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 25,
+        "read_rows": 446988,
+        "read_bytes": 56529870,
+        "peak_query_memory_bytes": 12058548,
+        "sum_query_duration_ms": 654
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.344,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 144,
+        "read_rows": 45255590,
+        "read_bytes": 3051824522,
+        "peak_query_memory_bytes": 27338141,
+        "sum_query_duration_ms": 14894
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6240.16,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 160436061,
+        "peak_query_memory_bytes": 5330060,
+        "sum_query_duration_ms": 6237
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 2815.012,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 4673894,
+        "read_bytes": 854742662,
+        "peak_query_memory_bytes": 23350170,
+        "sum_query_duration_ms": 2780
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6451.562,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 418,
+        "items": 0,
+        "bytes": 7363
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12001696,
+        "read_bytes": 160613467,
+        "peak_query_memory_bytes": 10145382,
+        "sum_query_duration_ms": 6449
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 12112.969,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 301,
+        "items": 0,
+        "bytes": 5205
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 23996235,
+        "read_bytes": 320945769,
+        "peak_query_memory_bytes": 11198930,
+        "sum_query_duration_ms": 12103
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 11827.631,
+      "result": {
+        "rows": 82,
+        "series": 82,
+        "samples": 0,
+        "items": 0,
+        "bytes": 111885
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 18,
+        "read_rows": 20950941,
+        "read_bytes": 6657235401,
+        "peak_query_memory_bytes": 16293733,
+        "sum_query_duration_ms": 11795
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 10133.037,
+      "result": {
+        "rows": 53,
+        "series": 53,
+        "samples": 0,
+        "items": 0,
+        "bytes": 82641
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 19260720,
+        "read_bytes": 530307547,
+        "peak_query_memory_bytes": 20028036,
+        "sum_query_duration_ms": 10076
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6537.572,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3314
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 12172102,
+        "read_bytes": 266926098,
+        "peak_query_memory_bytes": 19654683,
+        "sum_query_duration_ms": 6483
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 816.341,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 456892,
+        "read_bytes": 38896122,
+        "peak_query_memory_bytes": 10111398,
+        "sum_query_duration_ms": 790
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 669.798,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 176,
+        "items": 0,
+        "bytes": 4200
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 355126,
+        "read_bytes": 123140641,
+        "peak_query_memory_bytes": 22597928,
+        "sum_query_duration_ms": 654
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "1h",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8574.41,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 82
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 1971157417,
+        "peak_query_memory_bytes": 9685037,
+        "sum_query_duration_ms": 8573
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 179.97,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144777
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 65161099,
+        "peak_query_memory_bytes": 23197330,
+        "sum_query_duration_ms": 157
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9650.899,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 29132
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12001696,
+        "read_bytes": 1995438108,
+        "peak_query_memory_bytes": 10682499,
+        "sum_query_duration_ms": 9647
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [10s]))",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.552,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 54,
+        "read_rows": 37778325,
+        "read_bytes": 3099481772,
+        "peak_query_memory_bytes": 11986152,
+        "sum_query_duration_ms": 14988,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 393.986,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135587
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62276376,
+        "peak_query_memory_bytes": 14630741,
+        "sum_query_duration_ms": 138
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 503.902,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155227
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 94385162,
+        "peak_query_memory_bytes": 24301892,
+        "sum_query_duration_ms": 430
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "1h",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.298,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8371548,
+        "read_bytes": 6304703453,
+        "peak_query_memory_bytes": 23641800,
+        "sum_query_duration_ms": 15044,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.060 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "1h",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "retained_bytes",
+      "error": "selected result exceeds the bounded memory budget; narrow the selection",
+      "latency_ms": 1499.523,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 124
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 1297207,
+        "read_bytes": 173119720,
+        "peak_query_memory_bytes": 11760039,
+        "sum_query_duration_ms": 1035
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "1h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [10s]) by ()",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.939,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8366168,
+        "read_bytes": 6300647274,
+        "peak_query_memory_bytes": 23921520,
+        "sum_query_duration_ms": 15005,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15005.653 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "1h",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "10s",
+      "start": "2026-10-27T14:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8690.238,
+      "result": {
+        "rows": 0,
+        "series": 20,
+        "samples": 20,
+        "items": 0,
+        "bytes": 1493
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12000000,
+        "read_bytes": 1971157417,
+        "peak_query_memory_bytes": 9706917,
+        "sum_query_duration_ms": 8688
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "6h",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 10424.455,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14680034,
+        "read_bytes": 1640795491,
+        "peak_query_memory_bytes": 10033716,
+        "sum_query_duration_ms": 10423
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 82.417,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 60
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 10343.99,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 28354
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14685495,
+        "read_bytes": 1661450912,
+        "peak_query_memory_bytes": 11532772,
+        "sum_query_duration_ms": 10340
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.682,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 27,
+        "read_rows": 30218379,
+        "read_bytes": 2169595352,
+        "peak_query_memory_bytes": 12068041,
+        "sum_query_duration_ms": 15067,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 105.576,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 84
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 189.658,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 118
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "6h",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.771,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8277769,
+        "read_bytes": 6181465592,
+        "peak_query_memory_bytes": 29702375,
+        "sum_query_duration_ms": 15010,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.224 ms, maximum: 15000.000 ms: While executing MergeTreeSelect(pool: ReadPoolInOrder, algorithm: InOrder). (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "6h",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 693.679,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 31,
+        "items": 31,
+        "bytes": 8010
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 349021,
+        "read_bytes": 46158648,
+        "peak_query_memory_bytes": 9283220,
+        "sum_query_duration_ms": 446
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "6h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [60s]) by ()",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.683,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8413303,
+        "read_bytes": 6270984681,
+        "peak_query_memory_bytes": 31498967,
+        "sum_query_duration_ms": 15004,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15004.005 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "6h",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8568.743,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14680034,
+        "read_bytes": 689305989,
+        "peak_query_memory_bytes": 9718709,
+        "sum_query_duration_ms": 8567
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 72.587,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10302926,
+        "sum_query_duration_ms": 49
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8876.917,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 27281
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14685495,
+        "read_bytes": 696697712,
+        "peak_query_memory_bytes": 10686542,
+        "sum_query_duration_ms": 8873
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.403,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 38,
+        "read_rows": 38195247,
+        "read_bytes": 1135068540,
+        "peak_query_memory_bytes": 12334697,
+        "sum_query_duration_ms": 15057,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 108.744,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22699043,
+        "peak_query_memory_bytes": 5702887,
+        "sum_query_duration_ms": 88
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 193.389,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22853442,
+        "peak_query_memory_bytes": 14102363,
+        "sum_query_duration_ms": 122
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "6h",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.634,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 49,
+        "read_rows": 35541354,
+        "read_bytes": 3541624502,
+        "peak_query_memory_bytes": 29411820,
+        "sum_query_duration_ms": 14952,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "6h",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 774.942,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 54,
+        "items": 27,
+        "bytes": 7344
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 25,
+        "read_rows": 446988,
+        "read_bytes": 56529870,
+        "peak_query_memory_bytes": 10929913,
+        "sum_query_duration_ms": 523
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "6h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [60s]) by ()",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.776,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 71,
+        "read_rows": 32373998,
+        "read_bytes": 3953200050,
+        "peak_query_memory_bytes": 29423602,
+        "sum_query_duration_ms": 14941,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "6h",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8250.58,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14680034,
+        "read_bytes": 346076748,
+        "peak_query_memory_bytes": 9253810,
+        "sum_query_duration_ms": 8248
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 706.344,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 1444742,
+        "read_bytes": 145106473,
+        "peak_query_memory_bytes": 20890141,
+        "sum_query_duration_ms": 669
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8116.826,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 268,
+        "items": 0,
+        "bytes": 4824
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14685495,
+        "read_bytes": 347914979,
+        "peak_query_memory_bytes": 10040844,
+        "sum_query_duration_ms": 8114
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 8661.321,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 169,
+        "items": 0,
+        "bytes": 3001
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 15283787,
+        "read_bytes": 406131368,
+        "peak_query_memory_bytes": 10247800,
+        "sum_query_duration_ms": 8651
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9957.67,
+      "result": {
+        "rows": 95,
+        "series": 95,
+        "samples": 0,
+        "items": 0,
+        "bytes": 129827
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 24,
+        "read_rows": 22611059,
+        "read_bytes": 5190233687,
+        "peak_query_memory_bytes": 15781341,
+        "sum_query_duration_ms": 9917
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 11323.142,
+      "result": {
+        "rows": 63,
+        "series": 63,
+        "samples": 0,
+        "items": 0,
+        "bytes": 98260
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 26,
+        "read_rows": 23731754,
+        "read_bytes": 914643286,
+        "peak_query_memory_bytes": 20314997,
+        "sum_query_duration_ms": 11247
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "6h",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9949.484,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3314
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 15251549,
+        "read_bytes": 788058382,
+        "peak_query_memory_bytes": 21260879,
+        "sum_query_duration_ms": 9897
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "6h",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1376.071,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 31
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 26,
+        "read_rows": 1298350,
+        "read_bytes": 126479774,
+        "peak_query_memory_bytes": 10135726,
+        "sum_query_duration_ms": 1346
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "6h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [60s]) by ()",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1948.336,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 97,
+        "items": 0,
+        "bytes": 2546
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 1196584,
+        "read_bytes": 513814521,
+        "peak_query_memory_bytes": 25198654,
+        "sum_query_duration_ms": 1930
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "6h",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 10505.306,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 82
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14680034,
+        "read_bytes": 2405065689,
+        "peak_query_memory_bytes": 10019749,
+        "sum_query_duration_ms": 10504
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 295.56,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144777
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 65161099,
+        "peak_query_memory_bytes": 23197330,
+        "sum_query_duration_ms": 272
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 11505.397,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 1444,
+        "items": 0,
+        "bytes": 28440
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14685495,
+        "read_bytes": 2438700496,
+        "peak_query_memory_bytes": 10662138,
+        "sum_query_duration_ms": 11502
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [60s]))",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.456,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 50,
+        "read_rows": 92115409,
+        "read_bytes": 3303387171,
+        "peak_query_memory_bytes": 11874021,
+        "sum_query_duration_ms": 14952
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 510.977,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135587
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62276376,
+        "peak_query_memory_bytes": 15234711,
+        "sum_query_duration_ms": 281
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 398.191,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155227
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 94385162,
+        "peak_query_memory_bytes": 24301892,
+        "sum_query_duration_ms": 322
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "6h",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.719,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8172044,
+        "read_bytes": 6156085485,
+        "peak_query_memory_bytes": 23678091,
+        "sum_query_duration_ms": 15008,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.224 ms, maximum: 15000.000 ms: While executing MergeTreeSelect(pool: ReadPoolInOrder, algorithm: InOrder). (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "6h",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "retained_bytes",
+      "error": "selected result exceeds the bounded memory budget; narrow the selection",
+      "latency_ms": 1427.318,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 124
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 1297207,
+        "read_bytes": 173119720,
+        "peak_query_memory_bytes": 10469463,
+        "sum_query_duration_ms": 1197
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "6h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [60s]) by ()",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.842,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8182878,
+        "read_bytes": 6164122077,
+        "peak_query_memory_bytes": 23687115,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.017 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "6h",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "60s",
+      "start": "2026-10-27T09:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 10607.284,
+      "result": {
+        "rows": 0,
+        "series": 20,
+        "samples": 20,
+        "items": 0,
+        "bytes": 1495
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 14637416,
+        "read_bytes": 2404724745,
+        "peak_query_memory_bytes": 9766701,
+        "sum_query_duration_ms": 10605
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "24h",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.743,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 26525667,
+        "read_bytes": 2540355707,
+        "peak_query_memory_bytes": 10431124,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.144 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 71.826,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 51
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.037,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 25010523,
+        "read_bytes": 2371150556,
+        "peak_query_memory_bytes": 11075287,
+        "sum_query_duration_ms": 15004,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.954 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.143,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 24751098,
+        "read_bytes": 2310519504,
+        "peak_query_memory_bytes": 9714969,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.606 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 325.175,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 89
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 159.33,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 87
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "24h",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.78,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8343627,
+        "read_bytes": 5988455977,
+        "peak_query_memory_bytes": 29892084,
+        "sum_query_duration_ms": 15010,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15010.229 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "24h",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 953.641,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 31,
+        "items": 31,
+        "bytes": 8010
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 349021,
+        "read_bytes": 46158648,
+        "peak_query_memory_bytes": 9283220,
+        "sum_query_duration_ms": 696
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "24h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [300s]) by ()",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.118,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8106314,
+        "read_bytes": 5813831338,
+        "peak_query_memory_bytes": 29883369,
+        "sum_query_duration_ms": 15006,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15006.015 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "24h",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 14997.036,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 29321935,
+        "read_bytes": 1339939638,
+        "peak_query_memory_bytes": 10302207,
+        "sum_query_duration_ms": 14995
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 123.497,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10302926,
+        "sum_query_duration_ms": 98
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.612,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 28827455,
+        "read_bytes": 1320266265,
+        "peak_query_memory_bytes": 11621694,
+        "sum_query_duration_ms": 15001,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.018 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.331,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 29319793,
+        "read_bytes": 1341633240,
+        "peak_query_memory_bytes": 10420216,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.309 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 106.16,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22699043,
+        "peak_query_memory_bytes": 5702887,
+        "sum_query_duration_ms": 84
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 180.669,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22853442,
+        "peak_query_memory_bytes": 14102363,
+        "sum_query_duration_ms": 113
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "24h",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.487,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 12,
+        "read_rows": 92917262,
+        "read_bytes": 5321733434,
+        "peak_query_memory_bytes": 30458148,
+        "sum_query_duration_ms": 14997,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "24h",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 773.32,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 27,
+        "items": 27,
+        "bytes": 6898
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 25,
+        "read_rows": 446988,
+        "read_bytes": 56529870,
+        "peak_query_memory_bytes": 10929913,
+        "sum_query_duration_ms": 529
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "24h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [300s]) by ()",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.445,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 10,
+        "read_rows": 78993848,
+        "read_bytes": 5209621684,
+        "peak_query_memory_bytes": 30294084,
+        "sum_query_duration_ms": 15036,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "24h",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 13963.724,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 1,
+        "bytes": 81
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 29321935,
+        "read_bytes": 720960914,
+        "peak_query_memory_bytes": 9867186,
+        "sum_query_duration_ms": 13961
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 591.368,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 1440639,
+        "read_bytes": 142131012,
+        "peak_query_memory_bytes": 20365123,
+        "sum_query_duration_ms": 547
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.435,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 29211731,
+        "read_bytes": 720519629,
+        "peak_query_memory_bytes": 11160530,
+        "sum_query_duration_ms": 15006,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.052 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.482,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 26444130,
+        "read_bytes": 624039628,
+        "peak_query_memory_bytes": 9908105,
+        "sum_query_duration_ms": 15003,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.014 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 4903.695,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136419
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 24,
+        "read_rows": 9976687,
+        "read_bytes": 1963255175,
+        "peak_query_memory_bytes": 15520874,
+        "sum_query_duration_ms": 4859
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.113,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 29,
+        "read_rows": 40652188,
+        "read_bytes": 2040311284,
+        "peak_query_memory_bytes": 22261580,
+        "sum_query_duration_ms": 14893,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "24h",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 7194.854,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 41,
+        "bytes": 3318
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 4335876,
+        "read_bytes": 1996471331,
+        "peak_query_memory_bytes": 26306950,
+        "sum_query_duration_ms": 7124
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "24h",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 6564.752,
+      "result": {
+        "rows": 0,
+        "series": 4,
+        "samples": 761,
+        "items": 4,
+        "bytes": 12189
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 30,
+        "read_rows": 21937304,
+        "read_bytes": 673168116,
+        "peak_query_memory_bytes": 10135726,
+        "sum_query_duration_ms": 6525
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "24h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [300s]) by ()",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 9117.149,
+      "result": {
+        "rows": 0,
+        "series": 1,
+        "samples": 151,
+        "items": 0,
+        "bytes": 3694
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 7601440,
+        "read_bytes": 2067198677,
+        "peak_query_memory_bytes": 28010946,
+        "sum_query_duration_ms": 9090
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "24h",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.349,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 24007247,
+        "read_bytes": 3132371562,
+        "peak_query_memory_bytes": 10028130,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.521 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 381.997,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144777
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 65161099,
+        "peak_query_memory_bytes": 23271498,
+        "sum_query_duration_ms": 359
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.3,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 22201080,
+        "read_bytes": 2873577103,
+        "peak_query_memory_bytes": 11692703,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.054 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [300s]))",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.382,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 25338769,
+        "read_bytes": 3355620085,
+        "peak_query_memory_bytes": 9948943,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.620 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 339.58,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135587
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62276376,
+        "peak_query_memory_bytes": 14630741,
+        "sum_query_duration_ms": 318
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 440.567,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155227
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 94385162,
+        "peak_query_memory_bytes": 24301892,
+        "sum_query_duration_ms": 363
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "24h",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.479,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8048013,
+        "read_bytes": 6071658303,
+        "peak_query_memory_bytes": 23318356,
+        "sum_query_duration_ms": 15008,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15008.009 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "24h",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "retained_bytes",
+      "error": "selected result exceeds the bounded memory budget; narrow the selection",
+      "latency_ms": 1618.212,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 124
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 1297207,
+        "read_bytes": 173119720,
+        "peak_query_memory_bytes": 10469463,
+        "sum_query_duration_ms": 1152
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "24h",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [300s]) by ()",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.368,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8248265,
+        "read_bytes": 6225220025,
+        "peak_query_memory_bytes": 23327728,
+        "sum_query_duration_ms": 15008,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15008.092 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "24h",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "300s",
+      "start": "2026-10-26T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.265,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 20177844,
+        "read_bytes": 3315925352,
+        "peak_query_memory_bytes": 10015058,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.306 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "hot",
+      "range": "7d",
+      "path": "detected_labels",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.947,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 17281577,
+        "read_bytes": 2200451310,
+        "peak_query_memory_bytes": 11518848,
+        "sum_query_duration_ms": 15001,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.285 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 110.039,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145506
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 25534,
+        "read_bytes": 13105328,
+        "peak_query_memory_bytes": 14218312,
+        "sum_query_duration_ms": 84
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"edge-gateway\"} [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.844,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 19329820,
+        "read_bytes": 2459159636,
+        "peak_query_memory_bytes": 11587360,
+        "sum_query_duration_ms": 15004,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.908 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.954,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 17747810,
+        "read_bytes": 2563765193,
+        "peak_query_memory_bytes": 14191928,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.435 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 102.123,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136336
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 20172,
+        "read_bytes": 12700796,
+        "peak_query_memory_bytes": 5694612,
+        "sum_query_duration_ms": 82
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 156.628,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 156193
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 30258,
+        "read_bytes": 16030841,
+        "peak_query_memory_bytes": 10027611,
+        "sum_query_duration_ms": 85
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "hot",
+      "range": "7d",
+      "path": "detected_fields",
+      "query": "{service_name=\"edge-gateway\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.681,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8158877,
+        "read_bytes": 5524083820,
+        "peak_query_memory_bytes": 31468974,
+        "sum_query_duration_ms": 15009,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15009.031 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "hot",
+      "range": "7d",
+      "path": "patterns",
+      "query": "{service_name=\"edge-gateway\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 876.759,
+      "result": {
+        "rows": 0,
+        "series": 31,
+        "samples": 31,
+        "items": 31,
+        "bytes": 8010
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 22,
+        "read_rows": 349021,
+        "read_bytes": 46158648,
+        "peak_query_memory_bytes": 9283220,
+        "sum_query_duration_ms": 616
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "hot",
+      "range": "7d",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"edge-gateway\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [1800s]) by ()",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.88,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8353519,
+        "read_bytes": 5652378263,
+        "peak_query_memory_bytes": 31431134,
+        "sum_query_duration_ms": 15001,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.384 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "medium",
+      "range": "7d",
+      "path": "detected_labels",
+      "query": "{service_name=\"checkout\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.877,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 20589886,
+        "read_bytes": 1210320574,
+        "peak_query_memory_bytes": 10936063,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.551 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 110.383,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 145211
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 21476,
+        "read_bytes": 11659489,
+        "peak_query_memory_bytes": 10302926,
+        "sum_query_duration_ms": 89
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"checkout\"} [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15004.991,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 21108188,
+        "read_bytes": 1244685247,
+        "peak_query_memory_bytes": 10919376,
+        "sum_query_duration_ms": 15003,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.080 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.121,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 19406505,
+        "read_bytes": 1694448785,
+        "peak_query_memory_bytes": 14461363,
+        "sum_query_duration_ms": 15003,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.351 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 186.488,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 134342
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22699043,
+        "peak_query_memory_bytes": 5706114,
+        "sum_query_duration_ms": 162
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 196.879,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 153942
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 4,
+        "read_rows": 42952,
+        "read_bytes": 22853442,
+        "peak_query_memory_bytes": 14102363,
+        "sum_query_duration_ms": 129
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "medium",
+      "range": "7d",
+      "path": "detected_fields",
+      "query": "{service_name=\"checkout\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.075,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 8577653,
+        "read_bytes": 4817640043,
+        "peak_query_memory_bytes": 31078883,
+        "sum_query_duration_ms": 15011,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15011.380 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "medium",
+      "range": "7d",
+      "path": "patterns",
+      "query": "{service_name=\"checkout\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 966.551,
+      "result": {
+        "rows": 0,
+        "series": 27,
+        "samples": 27,
+        "items": 27,
+        "bytes": 6898
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 25,
+        "read_rows": 446988,
+        "read_bytes": 56529870,
+        "peak_query_memory_bytes": 10933209,
+        "sum_query_duration_ms": 721
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "medium",
+      "range": "7d",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"checkout\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [1800s]) by ()",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.547,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 7977489,
+        "read_bytes": 5145978142,
+        "peak_query_memory_bytes": 31519677,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.346 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "tail",
+      "range": "7d",
+      "path": "detected_labels",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.775,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 23643249,
+        "read_bytes": 629394387,
+        "peak_query_memory_bytes": 11547597,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.804 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 943.829,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 147201
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 16,
+        "read_rows": 1440639,
+        "read_bytes": 142131012,
+        "peak_query_memory_bytes": 20967101,
+        "sum_query_duration_ms": 869
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=\"archive-sweeper\"} [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.922,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 24531810,
+        "read_bytes": 652303184,
+        "peak_query_memory_bytes": 11491933,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.116 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15002.135,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 20225802,
+        "read_bytes": 837237229,
+        "peak_query_memory_bytes": 10700975,
+        "sum_query_duration_ms": 15014,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15013.416 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | log_http_droute=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 1467.598,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 136419
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 24,
+        "read_rows": 568578,
+        "read_bytes": 317941913,
+        "peak_query_memory_bytes": 15457242,
+        "sum_query_duration_ms": 1427
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.756,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 29,
+        "read_rows": 13916275,
+        "read_bytes": 2426288214,
+        "peak_query_memory_bytes": 23553660,
+        "sum_query_duration_ms": 14946,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "tail",
+      "range": "7d",
+      "path": "detected_fields",
+      "query": "{service_name=\"archive-sweeper\"} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15030.468,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 12541501,
+        "read_bytes": 2442234260,
+        "peak_query_memory_bytes": 26381122,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.299 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "tail",
+      "range": "7d",
+      "path": "patterns",
+      "query": "{service_name=\"archive-sweeper\"}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.667,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 31,
+        "read_rows": 27475235,
+        "read_bytes": 1103456201,
+        "peak_query_memory_bytes": 10681538,
+        "sum_query_duration_ms": 14982,
+        "exception_codes": [
+          735
+        ],
+        "exceptions": [
+          "Code: 735. DB::Exception: Received 'Cancel' packet from the client, canceling the query. (QUERY_WAS_CANCELLED_BY_CLIENT) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "tail",
+      "range": "7d",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=\"archive-sweeper\"} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [1800s]) by ()",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.181,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 7529181,
+        "read_bytes": 3037652304,
+        "peak_query_memory_bytes": 30379999,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.917 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "detected_labels",
+      "scope": "overview",
+      "range": "7d",
+      "path": "detected_labels",
+      "query": "{service_name=~`.+`}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.049,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 16065536,
+        "read_bytes": 2641628263,
+        "peak_query_memory_bytes": 11348973,
+        "sum_query_duration_ms": 15000,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15000.051 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "logs",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 374.556,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 144777
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 65161099,
+        "peak_query_memory_bytes": 23201562,
+        "sum_query_duration_ms": 350
+      }
+    },
+    {
+      "name": "level_count",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum by (detected_level) (count_over_time({service_name=~`.+`} [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.203,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 18373294,
+        "read_bytes": 3021003250,
+        "peak_query_memory_bytes": 10976745,
+        "sum_query_duration_ms": 15001,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.060 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "parsed_count",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "sum(count_over_time({service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ [1800s]))",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.023,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 18157131,
+        "read_bytes": 2985448801,
+        "peak_query_memory_bytes": 10994801,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.329 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "metadata_filter",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | log_http_droute=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 427.689,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 135587
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 2,
+        "read_rows": 106794,
+        "read_bytes": 62276376,
+        "peak_query_memory_bytes": 14630741,
+        "sum_query_duration_ms": 171
+      }
+    },
+    {
+      "name": "parsed_filter",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__ | endpoint=\"/api/v1/orders\"",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 200,
+      "error_class": "ok",
+      "latency_ms": 550.367,
+      "result": {
+        "rows": 100,
+        "series": 100,
+        "samples": 0,
+        "items": 0,
+        "bytes": 155227
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 3,
+        "read_rows": 160191,
+        "read_bytes": 94385162,
+        "peak_query_memory_bytes": 24302052,
+        "sum_query_duration_ms": 467
+      }
+    },
+    {
+      "name": "detected_fields",
+      "scope": "overview",
+      "range": "7d",
+      "path": "detected_fields",
+      "query": "{service_name=~`.+`} | json | logfmt | drop __error__, __error_details__",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15001.121,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 7637659,
+        "read_bytes": 5774633834,
+        "peak_query_memory_bytes": 23175557,
+        "sum_query_duration_ms": 15003,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15003.137 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "patterns",
+      "scope": "overview",
+      "range": "7d",
+      "path": "patterns",
+      "query": "{service_name=~`.+`}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 400,
+      "error_class": "retained_bytes",
+      "error": "selected result exceeds the bounded memory budget; narrow the selection",
+      "latency_ms": 1399.475,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 124
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 20,
+        "read_rows": 1297207,
+        "read_bytes": 173119720,
+        "peak_query_memory_bytes": 10469463,
+        "sum_query_duration_ms": 1161
+      }
+    },
+    {
+      "name": "unwrap",
+      "scope": "overview",
+      "range": "7d",
+      "path": "query_range",
+      "query": "avg_over_time({service_name=~`.+`} | logfmt | duration!=\"\" | unwrap duration(duration) | __error__=\"\" [1800s]) by ()",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.704,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 7518916,
+        "read_bytes": 5684652803,
+        "peak_query_memory_bytes": 23138821,
+        "sum_query_duration_ms": 15002,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15002.292 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    },
+    {
+      "name": "volume",
+      "scope": "overview",
+      "range": "7d",
+      "path": "index/volume",
+      "query": "{service_name=~`.+`}",
+      "step": "1800s",
+      "start": "2026-10-20T15:20:00Z",
+      "end": "2026-10-27T15:20:00Z",
+      "http_status": 504,
+      "error_class": "timeout",
+      "error": "context deadline exceeded",
+      "latency_ms": 15000.929,
+      "result": {
+        "rows": 0,
+        "series": 0,
+        "samples": 0,
+        "items": 0,
+        "bytes": 77
+      },
+      "adapter_process_lifetime_peak_rss_bytes": 76652544,
+      "clickhouse": {
+        "queries": 1,
+        "read_rows": 19226610,
+        "read_bytes": 3161310704,
+        "peak_query_memory_bytes": 11319946,
+        "sum_query_duration_ms": 15001,
+        "exception_codes": [
+          159
+        ],
+        "exceptions": [
+          "Code: 159. DB::Exception: Timeout exceeded: elapsed 15001.704 ms, maximum: 15000.000 ms. (TIMEOUT_EXCEEDED) (version 26.9.20.23 (official build))"
+        ]
+      }
+    }
+  ],
+  "reader_max_rows_to_read": 200000000,
+  "git_status_start": "M AGENTS.md\n M README.md\n M THIRD_PARTY.md\n M cmd/adapter/main.go\n M deploy/compose.yaml\n M docs/compatibility.md\n M docs/operations.md\n M docs/security.md\n M go.mod\n M go.sum\n M internal/engine/engine.go\n M internal/engine/results.go\n M internal/engine/results_test.go\n M internal/httpapi/contracts_integration_test.go\n M internal/httpapi/differential_integration_test.go\n M internal/httpapi/discovery.go\n M internal/httpapi/limits_test.go\n M internal/httpapi/params.go\n M internal/httpapi/query.go\n M internal/httpapi/server.go\n M internal/httpapi/server_test.go\n M internal/httpapi/volume.go\n M internal/query/evaluator.go\n M internal/query/evaluator_test.go\n M internal/query/query.go\n M internal/record/record.go\n M internal/sqlgen/compile.go\n M internal/sqlgen/compile_test.go\n M internal/sqlgen/selection.go\n M internal/sqlgen/selection_integration_test.go\n M internal/sqlgen/selection_test.go\n M internal/storage/client.go\n M internal/storage/client_integration_test.go\n M internal/storage/retry.go\n M internal/storage/retry_test.go\n M internal/storage/scan.go\n M internal/storage/summary.go\n M testdata/fixtures/README.md\n M testdata/fixtures/compose.yaml\n M testdata/fixtures/init.sql\n M tools/verify-live.py\n?? cmd/adapter/main_test.go\n?? internal/engine/metrics_pushdown_integration_test.go\n?? internal/engine/metrics_pushdown_test.go\n?? internal/engine/patterns.go\n?? internal/engine/patterns_test.go\n?? internal/engine/streaming_test.go\n?? internal/httpapi/patterns.go\n?? internal/httpapi/tail.go\n?? internal/httpapi/tail_test.go\n?? internal/limits/config.go\n?? internal/query/parser_drop_test.go\n?? internal/query/pushdown.go\n?? internal/query/pushdown_test.go\n?? internal/sqlgen/prefilter_integration_test.go\n?? internal/sqlgen/prefilter_test.go\n?? internal/storage/limits.go\n?? internal/storage/limits_test.go\n?? internal/storage/metrics.go\n?? testdata/bench/\n?? tools/bench/\n?? tools/browser-patterns-live.cjs"
+}

@@ -34,11 +34,11 @@ func TestSlidingWindowsAndBoundaries(t *testing.T) {
 
 func TestDuplicatesLimitAndCategorization(t *testing.T) {
 	event := Event{Timestamp: 1767225600000000011, Body: "duplicate", Processed: query.Processed{Stream: map[string]string{"service_name": "api"}, Metadata: map[string]string{"log_key": "value"}, Parsed: map[string]string{"n": "12"}}}
-	streams := Logs([]Event{event, event}, "backward", 2, true)
+	streams := Streams([]Event{event, event}, "backward", 2, true)
 	if len(streams) != 1 || len(streams[0].Values) != 2 || len(streams[0].Values[0]) != 3 || streams[0].Values[0][0] != "1767225600000000011" {
 		t.Fatalf("duplicate or nanosecond loss: %+v", streams)
 	}
-	if len(Logs([]Event{event, event}, "forward", 1, false)[0].Values) != 1 {
+	if len(Streams([]Event{event, event}, "forward", 1, false)[0].Values) != 1 {
 		t.Fatal("global limit not honored")
 	}
 	if Seconds(event.Timestamp) != json.Number("1767225600.000000011") {

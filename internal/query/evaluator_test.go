@@ -56,6 +56,10 @@ func TestMetricValidation(t *testing.T) {
 		`sum by (detected_level) (count_over_time({service_name="fixture-api"} | json | logfmt | drop __error__, __error_details__ [1m]))`,
 		`sum(rate({service_name="fixture-api"}[30s]))`,
 		`bytes_over_time({service_name="fixture-api"}[1m])`,
+		`count_over_time({service_name="fixture-api"}[2h])`,
+		`sum_over_time({service_name="fixture-api"} | json | unwrap n [1m])`,
+		`avg_over_time({service_name="fixture-api"} | logfmt | duration!="" | unwrap duration(duration) | __error__="" [1m]) by ()`,
+		`avg_over_time({service_name="fixture-api"} | json | unwrap bytes(size) [1m]) by (detected_level)`,
 	} {
 		plan, err := ParseQuery(text)
 		if err != nil || plan.Metric == nil {
@@ -66,8 +70,11 @@ func TestMetricValidation(t *testing.T) {
 		`avg(count_over_time({service_name="fixture-api"}[1m]))`,
 		`count_over_time({service_name="fixture-api"}[1m] offset 1m)`,
 		`sum(sum(count_over_time({service_name="fixture-api"}[1m])))`,
-		`sum_over_time({service_name="fixture-api"} | json | unwrap n [1m])`,
-		`count_over_time({service_name="fixture-api"}[2h])`,
+
+		`max_over_time({service_name="fixture-api"} | json | unwrap n [1m])`,
+		`quantile_over_time(0.9, {service_name="fixture-api"} | json | unwrap n [1m])`,
+		`sum(avg_over_time({service_name="fixture-api"} | json | unwrap n [1m]))`,
+		`count_over_time({service_name="fixture-api"}[1m]) by (detected_level)`,
 	} {
 		if _, err := ParseQuery(text); err == nil {
 			t.Fatalf("unsupported metric accepted: %s", text)

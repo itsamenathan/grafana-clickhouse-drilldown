@@ -59,105 +59,228 @@ https://grafana.h.frcv.net/api/datasources/proxy/uid/clickhouse-loki-go/source
 ```
 
 Grafana connects to `http://clickhouse-loki-go:3100` through the private Docker
-alias. Register a separate non-default Loki data source with UID
-`clickhouse-loki-go`. Keep `clickstack` as the global default. Current Grafana
-credentials come only from OpenBao `prod/observability`, in memory. Never use
-the retired `prod/grafana` token.
+alias. The data source is a separate non-default Loki source, UID
+`clickhouse-loki-go`, display name `ClickHouse Logs Drilldown`. Keep
+`clickstack` as the global default. Current Grafana credentials come only from
+OpenBao `prod/observability`, in memory. Never use the retired `prod/grafana`
+token. Explore's Live mode reaches the adapter's tail websocket through
+Grafana's data-source proxy; Compose sets `ADAPTER_ALLOWED_ORIGINS` to
+Grafana's public origin for that browser handshake.
 
-Deploy only an exact tested local image ID/build reference, retain the image
-archive and corresponding source privately for rollback, and record the
-actual image/source hashes with acceptance results. This repository is not an
-automatic deployment. Reinspect live definitions before each update.
+## Update procedure
 
-The accepted build is image
-`sha256:b6e0da06a5af6aa4da6a32d0e5dee03b36fa1c40572b616f16c4ca600d0501b6`.
-Its corresponding-source SHA-256 is
-`4dfe387e2479ce75759c4e180bd109c60c75a2e482af08fb84f05bfdecfbbd3b`.
-Both the loaded image and the authenticated Grafana source download were
-verified against those identities. The immutable image archive, source archive
-and manifest are retained in the runtime directory. The data-source display
-name is `ClickHouse Logs Drilldown`, still non-default.
+Reinspect the live Compose file, `.env` keys (not values) and running image
+before each update. Deploy only an exact tested local image ID:
 
-The 2026-10-23 code-396 fix replaces full-record downloads with exact SQL
-summaries for selector-only overview volumes, statistics and discovery. A
-one-hour live SQL comparison passed for all 40 services and 10,883 records,
-including 1,233,406 message bytes. All 12 standard live checks passed using a
-complete 120-record service control; the cross-service negative-selector
-control requests 100 rows. Large metadata-heavy log pages and residual scans
-can still exceed the unchanged result budget and must fail explicitly.
-Authenticated source, runtime manifest/archive hashes, SQL, PromQL and fresh
-ingestion were reverified. The prior runtime's private rollback files are in
-`/root/docker/clickhouse-loki-adapter/rollback-code396-20261023T142402Z`.
+1. Build with `ADAPTER_VERSION` set and record the image ID.
+2. `docker save` the image, copy the archive to the runtime directory, `docker
+   load` it, and confirm the loaded ID matches.
+3. Extract `/source.tar.gz` from the image into the runtime directory and
+   record image, archive and source SHA-256 values in `manifest.json`.
+4. Back up the previous `.env`, `manifest.json` and source archive with a
+   `.before-<short image id>` suffix. Change only the `ADAPTER_IMAGE` line.
+5. Update `compose.yaml` from `deploy/compose.yaml` if it changed, then
+   `docker compose up -d` in the runtime directory. This recreates only the
+   adapter.
+6. Run the acceptance commands below and record results here and in the
+   runtime README.
 
-Current browser revalidation does not pass. The latest 20-service run returned
-a bounded-scan error on a query even though all overview summary comparisons
-passed. An earlier run also failed service log/count and detected-field
-requests. Do not treat the original accepted browser/load measurements below
-as acceptance of this incident fix under today's data volume. The adapter
-remains healthy; the incident is only partially resolved.
+To roll back, restore the previous `.env` (its `ADAPTER_IMAGE` line) and
+`compose.yaml`, then `docker compose up -d`. Retained image archives can be
+reloaded with `docker load`. Each `.before-<id>` file holds the state before
+build `<id>` was deployed. The 2026-10-26 build `ac65bf38c4fe` (one-hour range
+cap, no ClickHouse aggregation) is restored from the `.before-6878a99aa0f2`
+files; the 2026-10-23 build `b6e0da06a5af` (no patterns or tail) from the
+`.before-d2cddc718b2e` files.
+
+## Current build and acceptance
+
+Deployed 2026-10-28: version `2026.10.28.1`, image
+`sha256:813e57d668fba2094fc68c9417e991f6cc9648738c99c01dd8474e2b08758e83`,
+image archive SHA-256
+`52a14545fea89a4d563e268c4aba449b8017339ed9c949c88ba611a7dcb66ea6`,
+corresponding source SHA-256
+`7299117defc3ca91c99f8a3fe34ef406cad092ea273adb15b4348509cc7881b1`. It
+removes the fixed 4 MiB HTTP response cap and writes log pages value by
+value. With roughly 2.4 KB of structured metadata per line, a 2,000-line page
+is about 5 MB and was rejected by `2026.10.27.3`. Live checks on 2026-10-28:
+all 14 API/SQL checks pass, including a 2,000-line page of the most
+attribute-heavy service over a day (5.0 MB, matching the newest 2,000 SQL
+rows); that page returns in about one second over 24 hours and three days in
+both response encodings; the Drilldown UI exercise over 24 hours passes (53
+queries, 11,600 rows); adapter peak memory 64 MiB, no restarts.
+
+The previous build, `2026.10.27.3` (`6ee35a8adf05`, restored from the
+`.before-813e57d668fb` files), still has the response cap. It introduced the
+rest of the current behavior: it removes the fixed one-hour range cap in favor
+of configurable cost limits, aggregates supported metrics in ClickHouse, reads log pages newest
+first in growing windows, maps service identity from `ServiceName` with this
+deployment's journald fallback, and takes all ClickHouse settings from the
+reader profile. It also contains fixes from an independent review: regex
+filters are evaluated only by Loki's residual stages, split pages share one
+memory budget, unwrapped averages follow Loki's arithmetic, tail startup and
+overload cannot lose records, and pattern memory accounting is calibrated.
+Earlier builds of 2026-10-27, `6878a99aa0f2` and `b11bcf3baa88`, contain
+regex pushdown errors and must not be restored.
+
+Live acceptance of `2026.10.27.3` on 2026-10-27, against production data with
+three days of retention:
+
+- All 13 API/SQL checks pass.
+- Over 24 hours and three days, volumes, level and parsed counts,
+  case-insensitive text search, log pages, detected fields and patterns each
+  return in under two seconds.
+- The Drilldown UI exercise passes over 24 hours (41 queries, 11,505 verified
+  rows) and three days (40 queries, 11,606 rows) with no failed requests.
+- A 20-service overview over three days loads in 5.9 seconds; over 15 minutes
+  in 4.3 seconds.
+- Patterns render and filter; a varied service's patterns succeed over 36
+  hours and three days on 20 of 20 attempts. Explore's Live mode delivers a
+  backlog and new records and stays open for 75 seconds.
+- The adapter's container-lifetime memory peak was 70 MiB of its 256 MiB
+  limit, with no restarts or panics.
+
+Synthetic production-scale measurements (100 million rows, seven days, see
+`testdata/bench`) are recorded in `testdata/bench/results/README.md`.
+
+Known limitations: unwrapped averages over very busy services and long ranges
+fail explicitly at the scan or deadline bounds. A Fields-tab chart of a field
+with a distinct value per record, such as journald `__CURSOR`, fails
+explicitly beyond 1,000 series, as Loki does beyond `max_query_series`.
 
 ## Acceptance commands
 
-After creating the separate runtime and reader, register only the new source
-and compare it with settled direct-SQL results:
+Compare the registered source with settled direct-SQL results, then exercise
+the real UI:
 
 ```sh
-python3 tools/verify-live.py --register
+python3 tools/verify-live.py
 PLAYWRIGHT_MODULE=/tmp/opencode/drilldown-browser/node_modules/playwright \
   python3 tools/measure-live.py
 ```
 
-The verifier prints pass/fail counts, not log bodies. The measurement command
-loads a 20-service overview in a fresh browser context and checks every
-returned log's selected-service identity using the real LogQL parser. It
-samples the adapter and ClickHouse cgroups once per second and reports both
-sampled maximum memory and container-lifetime peaks. ClickHouse is shared, so
-these figures do not attribute all database memory to the adapter. Missing
-samples or browser failures fail the command. These scripts are release-gate
-tools, not evidence of a completed live deployment by themselves.
+The verifier prints pass/fail counts, not log bodies. It includes a filtered
+count of the busiest service's last hour against SQL, which needs paged scans,
+and a patterns check: Loki pruning, Unix-second steps, sample totals no
+larger than the record count and a nonempty `|>` filter for the top pattern.
+The measurement command loads a 20-service overview in a fresh browser context
+and checks every returned log's selected-service identity using the real
+LogQL parser. It samples the adapter and ClickHouse cgroups once per second.
+ClickHouse is shared, so these figures do not attribute all database memory
+to the adapter.
+
+`tools/browser-patterns-live.cjs` reads `{url, token, datasource, service,
+holdSeconds}` as JSON on stdin. It opens Drilldown's Patterns tab, includes the
+top pattern and checks the filtered logs, then starts Explore's Live mode and
+requires a backlog frame and new records, optionally holding the websocket for
+`holdSeconds`. Websocket handshakes cannot be routed, so the credential is a
+browser-context header and every request to another origin is aborted. It
+prints counts and pattern counts only.
 
 ## Readiness and resource bounds
 
-`/healthz` means the process is alive. `/ready` runs a real bounded SELECT
-against the configured table. The Grafana `vector(1)+vector(1)` probe also
+These controls describe current source, validated locally. The deployed build
+recorded above has not received the service-mapping, reader-profile or guarded
+metric changes.
+
+`/healthz` means the process is alive. `/ready` verifies `readonly=1`, throwing result/read/group/sort/timeout overflow
+modes, and a real SELECT against the configured table. Startup requires the same
+checks before opening the listener. The Grafana `vector(1)+vector(1)` probe also
 requires that real readiness query before returning its arithmetic result.
 `/adapter healthcheck` calls `/ready`; it does not trust a canned success.
 
 HTTP admission permits two active queries and 32 waiting requests. The native
-client has two connections and its own bounded gate. Requests have 15-second
-deadlines, and native query cancellation retains the original context's Done
-signal. The driver-specific context adapter prevents the pinned driver's
-automatic attempt to change server timeout settings under `readonly=1`.
-Native end-of-stream/cancellation can arrive before ClickHouse releases its
-process-list slot. Only server busy code 202 receives a bounded retry while
-the same admission permit and original deadline remain held: at most eight
-attempts and 635 ms total backoff. Persistent contention returns overload;
-memory/read/result limits and other errors are not retried. This does not
-increase either the client or server's two-query concurrency limit.
+client has two connections and its own bounded gate, taken per database query.
+Requests have configurable deadlines, 15 seconds by default. Cancellation
+retains the original context's Done signal. The driver-specific context adapter prevents
+the pinned driver's automatic attempt to change server timeout settings under
+`readonly=1`. Only server busy code 202 receives a bounded retry while the
+same permit and deadline remain held: at most eight attempts and 635 ms total
+backoff. Persistent contention returns overload; memory/read/result limits
+and other errors are not retried.
 
 The restricted server profile enforces one thread/query, 128 MiB/query,
 15 seconds, 10,000 result rows, 4 MiB result bytes, two million rows read and
 two concurrent queries. Overflow throws, never returns partial success.
-Selected records also have a 64 KiB per-record and 8 MiB decoded scan/pipeline
-budget. HTTP query responses are at most 4 MiB; source downloads stream
-separately and are not query responses.
+
+Record scans are paged. A grouped count and `byteSize` estimate per time
+bucket plans pages of at most 4,000 rows and 2 MiB estimated. Startup reads
+`max_result_rows` and `max_result_bytes` from the server and lowers these page
+budgets to half of any smaller limits. Zero server limits retain the defaults. Each page is buffered whole (at most 16 MiB decoded)
+before it is visited; a page the server still rejects for size is split in
+time and refetched, so no record is visited twice. Buckets larger than one
+page are replanned at finer resolution. Logs, fields, field values and tail
+backlogs plan disjoint windows from the requested edge and stop when enough
+matching lines arrive. Windows grow fourfold, or sixteenfold when empty, so
+sparse selections do not require a query for every second of a long range. The adapter defaults to at most
+200,000 transferred records per request; one record is at most 64 KiB with
+128 attributes. Endpoints keep at most 32 MiB of retained results by default. HTTP responses
+have no separate size cap: every payload is bounded before encoding, and log
+pages, the largest, are written value by value rather than encoded whole. A
+2,000-line page with heavy structured metadata can exceed 4 MB. Exceeding any bound is an
+explicit error asking for a narrower selection.
 
 Selector-only volumes/statistics and service discovery aggregate inside
-ClickHouse instead of transferring every record's body and metadata. Summary
-output is limited to 5,000 services and the same 4 MiB result budget. Pipeline
-queries retain residual evaluation and scan limits. A remaining code 396 error
-therefore reports the bounded scan budget and asks for a narrower selection;
-it must not be retried or fixed by silently returning partial counts.
+ClickHouse instead of transferring records. Summary output is limited to
+5,000 services and the same 4 MiB result budget. Label discovery and plain
+count/rate aggregates skip message-byte totals and unused body reads.
 
-Metric/discovery ranges and metric lookback windows are at most one hour.
-Log ranges allow Grafana's two-hour context window plus one millisecond for
-its nanosecond-refined near edge. That does not increase any database scan,
-memory, row or deadline budget. Zero-width millisecond label/series discovery
-uses the containing millisecond bucket, as required by Grafana log context.
-At most 2,000 evaluation points, 1,000 metric groups and 10,000 output samples
-are allowed. Log output limits are at most 2,000. These are bounds, not a
-promise that all one-hour queries fit the byte/read budgets. Narrow the time
-range or selector when a budget error occurs.
+Time ranges and metric lookback windows have no default cap. Optional
+`ADAPTER_MAX_QUERY_RANGE` applies to both, with one step of Grafana's outward
+alignment allowed for metric request bounds. Zero-width millisecond
+label/series discovery still uses the containing millisecond bucket, as required
+by Grafana log context. Output bounds remain 2,000 evaluation points, 1,000
+metric groups, 10,000 metric samples, 5,000 services and 2,000 log entries.
+
+Configuration is validated before opening the database. Durations use Go syntax,
+for example `15s`, `2h` or `721h`, not `1d`. Integer budgets use decimal counts
+or bytes without suffixes. Empty variables use defaults. Negative values,
+invalid syntax and overflowing values fail startup. Only the optional time cap
+accepts zero.
+
+| Variable | Default | Meaning |
+| --- | --- | --- |
+| `ADAPTER_SERVICE_NAME_ATTRIBUTES` | empty | Ordered attribute fallbacks before `ServiceName`; bare keys use LogAttributes, `resource:` selects ResourceAttributes |
+| `ADAPTER_MAX_QUERY_RANGE` | `0s` | Optional request range and metric window cap; zero disables it |
+| `ADAPTER_REQUEST_TIMEOUT` | `15s` | Whole HTTP request deadline and deadline for each tail query |
+| `ADAPTER_TAIL_LOOKBACK` | `1h` | Default and maximum initial tail lookback |
+| `ADAPTER_PATTERN_LINES` | `50000` | Maximum newest lines collected for pattern training, positive integer below the platform maximum |
+| `ADAPTER_MAX_SCAN_ROWS` | `200000` | Maximum records transferred across scan pages |
+| `ADAPTER_MAX_SCAN_BYTES` | `268435456` | Maximum estimated decoded bytes transferred across scan pages |
+| `ADAPTER_MAX_RETAINED_BYTES` | `33554432` | Retained results, pattern input/model/output, field values, discovery, volumes and metric samples; also caps decoded storage pages |
+
+The adapter sends no ClickHouse query settings. The server reader profile owns
+threads, physical rows read, memory, result size, execution time and overflow
+behavior. The former `ADAPTER_MAX_READ_ROWS` and `ADAPTER_QUERY_MEMORY_BYTES`
+variables have been removed. Setting them has no effect. There is no client
+settings opt-in. Client deadlines and scan/retention guards remain active.
+
+Scan row/byte budgets count transferred records and their decoded estimates,
+not all rows or compressed bytes ClickHouse examines. They span scan pages.
+The ClickHouse read-row, memory and execution limits apply separately to each
+SQL query, including planning and aggregation. They do not become a cumulative
+physical-read budget across a request's multiple SQL queries. The request
+deadline bounds that work; aggregation still fails if any reader limit is hit.
+
+Keep Grafana's Loki data source `jsonData.timeout` greater than or equal to
+`ADAPTER_REQUEST_TIMEOUT`; the deployed source uses 20 seconds. HTTP write
+allowance is the adapter deadline plus five seconds. Changing the adapter's
+limits does not raise the restricted reader's server profile. Adjust that
+profile separately under the infrastructure access/deployment procedure if
+needed, preserving throwing overflow modes, bounded rows/bytes read, memory,
+execution time and concurrency. Read-only credentials cannot raise server
+limits. The client deadline may be shorter than the server deadline. A server
+profile can be resized without rebuilding or matching client query settings.
+
+Unwrapped `avg_over_time`/`sum_over_time` stop after 20 million sample visits.
+Patterns collect at most the newest 50,000 lines by default, train ascending,
+cover at most 500 streams, and return at most 300 patterns after Loki's minimum
+30-sample pruning. Coverage headers and partial first buckets are described in
+[patterns](compatibility.md#patterns). Memory exhaustion is an error, not an
+implicit reduction of the line limit. Tails permit four concurrent streams,
+one hour each, with two-second polls over a 60-second reread window, at most
+2,000 new records per poll and 20,000 tracked. Each tail query has the configured
+request deadline and takes the storage gate like any other query.
 
 ## Rollback and retirement
 

@@ -1,0 +1,102 @@
+{
+  "rows": 100000064,
+  "bytes_on_disk": 13952447887,
+  "uncompressed_bytes": 83334420403,
+  "parts": 182,
+  "requested_rows": 100000000,
+  "selected_rows": 100000000,
+  "scale": 1.0,
+  "days": 7,
+  "end": "2026-10-27T15:20:00+00:00",
+  "start": "2026-10-20T15:20:00+00:00",
+  "generation_seconds": 969.216,
+  "free_disk_before": 82591268864,
+  "available_ram_before": 10517307392,
+  "estimated_bytes_per_row": 139.788206,
+  "max_gib": 18.0,
+  "services": [
+    {
+      "service": "edge-gateway",
+      "rows": 59993476
+    },
+    {
+      "service": "checkout",
+      "rows": 15004356
+    },
+    {
+      "service": "payments",
+      "rows": 8999479
+    },
+    {
+      "service": "search",
+      "rows": 6004305
+    },
+    {
+      "service": "catalog",
+      "rows": 4000517
+    },
+    {
+      "service": "orders",
+      "rows": 2501332
+    },
+    {
+      "service": "inventory",
+      "rows": 1499181
+    },
+    {
+      "service": "auth",
+      "rows": 999747
+    },
+    {
+      "service": "notifications",
+      "rows": 498368
+    },
+    {
+      "service": "shipping",
+      "rows": 200324
+    },
+    {
+      "service": "billing",
+      "rows": 99788
+    },
+    {
+      "service": "recommendations",
+      "rows": 60000
+    },
+    {
+      "service": "audit",
+      "rows": 39984
+    },
+    {
+      "service": "scheduler",
+      "rows": 29531
+    },
+    {
+      "service": "backup",
+      "rows": 19811
+    },
+    {
+      "service": "cert-renewer",
+      "rows": 15037
+    },
+    {
+      "service": "dns-sync",
+      "rows": 11961
+    },
+    {
+      "service": "quota-cleaner",
+      "rows": 9955
+    },
+    {
+      "service": "report-exporter",
+      "rows": 7909
+    },
+    {
+      "service": "archive-sweeper",
+      "rows": 4939
+    }
+  ],
+  "total_generation_seconds": 1156.601,
+  "sql_sha256": "4632c32b1ab900e96925a73001818b42386886123abae61098d86837baf2045a",
+  "live_rows": 64
+}
